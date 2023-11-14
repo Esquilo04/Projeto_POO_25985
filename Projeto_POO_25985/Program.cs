@@ -15,6 +15,7 @@ namespace Projeto_POO_25985
             Cliente cliente = new Cliente(1, "rafa", 123, "RUA DO CAEALHP", 92);
 
             cliente.ToString();
+
             Console.ReadKey();
 
         }

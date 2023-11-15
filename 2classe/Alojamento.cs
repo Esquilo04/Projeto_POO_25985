@@ -31,6 +31,13 @@ namespace _2classe
             classificacaoAlojamento = 0;
         }
 
+        /// <summary>
+        /// Construtor por Parametros
+        /// </summary>
+        /// <param name="idAlojamento">Varivel que identifica o id do alojamento</param>
+        /// <param name="moradaAlojamento"></param>
+        /// <param name="numeroQuartos"></param>
+        /// <param name="classificacaoAlojamento"></param>
         public Alojamento(int idAlojamento, string moradaAlojamento, int numeroQuartos, int classificacaoAlojamento)
         {
             this.idAlojamento = idAlojamento;

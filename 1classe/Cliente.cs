@@ -58,7 +58,7 @@ namespace _1classe
         }
         #endregion
 
-        // Propriedades para acessar os atributos privados da classe Cliente
+
         #region Propriedades
 
         /// <summary>

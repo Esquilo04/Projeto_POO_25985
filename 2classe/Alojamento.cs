@@ -7,13 +7,19 @@ using _1classe;
 
 namespace _2classe
 {
+    /// <summary>
+    /// Classe que representa um alojamento.
+    /// </summary>
     public class Alojamento
     {
+        /// <summary>
+        /// Estado da classe Alojamento.
+        /// </summary>
         #region Estado
-        private int idAlojamento;
-        private string moradaAlojamento;
-        private int numeroQuartos;
-        private int classificacaoAlojamento;
+        private int idAlojamento;               // ID do alojamento
+        private string moradaAlojamento;        // Morada do alojamento
+        private int numeroQuartos;              // Número de quartos no alojamento
+        private int classificacaoAlojamento;    // Classificação do alojamento (1 a 5)
         #endregion
 
         #region Comportamentos
@@ -21,7 +27,7 @@ namespace _2classe
         #region Construtores
 
         /// <summary>
-        /// Construtor por Omissão
+        /// Construtor por Omissão que inicializa um Alojamento com valores padrão.
         /// </summary>
         public Alojamento()
         {
@@ -32,12 +38,12 @@ namespace _2classe
         }
 
         /// <summary>
-        /// Construtor por Parametros
+        /// Construtor que permite criar um Alojamento com valores específicos.
         /// </summary>
-        /// <param name="idAlojamento">Varivel que identifica o id do alojamento</param>
-        /// <param name="moradaAlojamento"></param>
-        /// <param name="numeroQuartos"></param>
-        /// <param name="classificacaoAlojamento"></param>
+        /// <param name="idAlojamento">ID do alojamento</param>
+        /// <param name="moradaAlojamento">Morada do alojamento</param>
+        /// <param name="numeroQuartos">Número de quartos</param>
+        /// <param name="classificacaoAlojamento">Classificação do alojamento</param>
         public Alojamento(int idAlojamento, string moradaAlojamento, int numeroQuartos, int classificacaoAlojamento)
         {
             this.idAlojamento = idAlojamento;
@@ -50,6 +56,9 @@ namespace _2classe
 
         #region Propriedades
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do alojamento.
+        /// </summary>
         public int IdAlojamento
         {
             set
@@ -63,6 +72,9 @@ namespace _2classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar a morada do alojamento.
+        /// </summary>
         public string MoradaAlojamento
         {
             set
@@ -75,6 +87,9 @@ namespace _2classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o número de quartos do alojamento.
+        /// </summary>
         public int NumeroQuartos
         {
             set
@@ -88,6 +103,9 @@ namespace _2classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar a classificação do alojamento.
+        /// </summary>
         public int ClassificacaoAlojamento
         {
             set
@@ -105,6 +123,9 @@ namespace _2classe
 
         #region Operadores
 
+        /// <summary>
+        /// Verifica se dois alojamentos são iguais com base nos seus atributos.
+        /// </summary>
         public static bool operator ==(Alojamento p1, Alojamento p2)
         {
             if ((p1.idAlojamento == p2.idAlojamento) && (p1.moradaAlojamento == p2.moradaAlojamento) && (p1.numeroQuartos == p2.numeroQuartos) && (p1.classificacaoAlojamento == p2.classificacaoAlojamento))
@@ -112,6 +133,9 @@ namespace _2classe
             return false;
         }
 
+        /// <summary>
+        /// Verifica se dois alojamentos são diferentes com base nos seus atributos.
+        /// </summary>
         public static bool operator !=(Alojamento p1, Alojamento p2)
         {
             if (p1 == p2)
@@ -123,11 +147,17 @@ namespace _2classe
 
         #region Overrides
 
+        /// <summary>
+        /// Retorna uma representação textual do objeto Alojamento.
+        /// </summary>
         public override string ToString()
         {
             return String.Format("Id Alojamento: {0} - Morada Alojamento: {1} - Número Quartos: {2} - Classificação Alojamento: {3}", idAlojamento.ToString(), moradaAlojamento, numeroQuartos.ToString(), classificacaoAlojamento.ToString());
         }
 
+        /// <summary>
+        /// Verifica se o objeto fornecido é igual a este Alojamento.
+        /// </summary>
         public override bool Equals(object obj)
         {
             if (obj is Alojamento)

@@ -7,16 +7,21 @@ using _2classe;
 
 namespace _1classe
 {
+    /// <summary>
+    /// Classe que representa um check-in de um cliente em um hotel.
+    /// </summary>
     public class Check_in
     {
+        /// <summary>
+        /// Estado da classe Check-in.
+        /// </summary>
         #region Estado
 
-        private int idCheckIn;
-        private Cliente cliente;
-        private DateTime dataCheckIn;
-        private DateTime dataCheckOut;
-        private int numeroQuarto;
-
+        private int idCheckIn;           // ID do check-in
+        private Cliente cliente;         // Cliente associado ao check-in
+        private DateTime dataCheckIn;    // Data de entrada
+        private DateTime dataCheckOut;   // Data de saída
+        private int numeroQuarto;        // Número do quarto associado ao check-in
         #endregion
 
         #region Comportamentos
@@ -24,7 +29,7 @@ namespace _1classe
         #region Construtores
 
         /// <summary>
-        /// Construtor por Omissão
+        /// Construtor por Omissão que inicializa um Check-in com valores padrão.
         /// </summary>
         public Check_in()
         {
@@ -35,6 +40,14 @@ namespace _1classe
             numeroQuarto = 0;
         }
 
+        /// <summary>
+        /// Construtor que permite criar um Check-in com valores específicos.
+        /// </summary>
+        /// <param name="id">ID do check-in</param>
+        /// <param name="cliente">Cliente associado</param>
+        /// <param name="dataCheckIn">Data de entrada</param>
+        /// <param name="dataCheckOut">Data de saída</param>
+        /// <param name="numeroQuarto">Número do quarto</param>
         public Check_in(int id, Cliente cliente, DateTime dataCheckIn, DateTime dataCheckOut, int numeroQuarto)
         {
             this.idCheckIn = id;
@@ -48,6 +61,9 @@ namespace _1classe
 
         #region Propriedades
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do check-in.
+        /// </summary>
         public int IdCheckIn
         {
             set
@@ -61,6 +77,9 @@ namespace _1classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o Cliente associado ao check-in.
+        /// </summary>
         public Cliente Cliente
         {
             get
@@ -73,6 +92,9 @@ namespace _1classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar a data de entrada do check-in.
+        /// </summary>
         public DateTime DataCheckIn
         {
             get
@@ -85,6 +107,9 @@ namespace _1classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar a data de saída do check-in.
+        /// </summary>
         public DateTime DataCheckOut
         {
             get
@@ -97,6 +122,9 @@ namespace _1classe
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o número do quarto associado ao check-in.
+        /// </summary>
         public int NumeroQuarto
         {
             get
@@ -113,6 +141,9 @@ namespace _1classe
 
         #region Operadores
 
+        /// <summary>
+        /// Verifica se dois check-ins são iguais com base nos seus atributos.
+        /// </summary>
         public static bool operator ==(Check_in p1, Check_in p2)
         {
             if ((p1.idCheckIn == p2.idCheckIn) && (p1.cliente == p2.cliente) && (p1.dataCheckIn == p2.dataCheckIn) &&
@@ -121,6 +152,9 @@ namespace _1classe
             return false;
         }
 
+        /// <summary>
+        /// Verifica se dois check-ins são diferentes com base nos seus atributos.
+        /// </summary>
         public static bool operator !=(Check_in p1, Check_in p2)
         {
             if (p1 == p2)
@@ -132,11 +166,17 @@ namespace _1classe
 
         #region Overrides
 
+        /// <summary>
+        /// Retorna uma representação textual do objeto Check-in.
+        /// </summary>
         public override string ToString()
         {
             return String.Format("Id Check-In: {0} - Cliente: {1} - Data Check-In: {2} - Data Check-Out: {3} - Número Quarto: {4}", idCheckIn.ToString(), cliente.NomeCliente, dataCheckIn.ToString(), dataCheckOut.ToString(), numeroQuarto.ToString());
         }
 
+        /// <summary>
+        /// Verifica se o objeto fornecido é igual ao Check-in.
+        /// </summary>
         public override bool Equals(object obj)
         {
             if (obj is Check_in)

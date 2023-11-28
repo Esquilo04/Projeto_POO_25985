@@ -19,6 +19,9 @@ namespace Projeto_POO_25985
 {
     internal class Program
     {
-    
+        static void Main(string[] args)
+        {
+
+        }
     }
 }

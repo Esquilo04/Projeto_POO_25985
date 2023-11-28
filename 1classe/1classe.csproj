@@ -45,9 +45,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Check_in.cs" />
+    <Compile Include="Check_ins.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Clientes.cs" />
+    <Compile Include="ICheck_in.cs" />
+    <Compile Include="IClientes.cs" />
+    <Compile Include="IReserva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reserva.cs" />
+    <Compile Include="Reservas.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

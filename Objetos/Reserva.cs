@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2classe;
 
-namespace _1classe
+
+namespace Objetos
 {
     /// <summary>
     /// Classe que representa uma reserva de hospedagem de um cliente.
@@ -40,7 +40,6 @@ namespace _1classe
         /// </summary>
         public Reserva()
         {
-            cliente = null;
             idReserva = 0;
             numeroHospedes = 0;
             dataEntrada = DateTime.Now;
@@ -52,16 +51,14 @@ namespace _1classe
         /// <summary>
         /// Construtor que permite criar uma Reserva com valores específicos.
         /// </summary>
-        /// <param name="cliente">Cliente associado</param>
         /// <param name="idReserva">ID da reserva</param>
         /// <param name="numeroHospedes">Número de hóspedes</param>
         /// <param name="dataEntrada">Data de entrada</param>
         /// <param name="dataSaida">Data de saída</param>
         /// <param name="regime">Regime da estadia</param>
         /// <param name="valor">Valor da estadia</param>
-        public Reserva(Cliente cliente, int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime)
+        public Reserva(int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valor)
         {
-            this.cliente = cliente;
             this.idReserva = idReserva;
             this.numeroHospedes = numeroHospedes;
             this.dataEntrada = dataEntrada;
@@ -74,20 +71,6 @@ namespace _1classe
 
         #region Propriedades
 
-        /// <summary>
-        /// Propriedade para acessar e modificar o Cliente associado à reserva.
-        /// </summary>
-        public Cliente Cliente
-        {
-            get
-            {
-                return cliente;
-            }
-            set
-            {
-                cliente = value;
-            }
-        }
 
         /// <summary>
         /// Propriedade para acessar e modificar o ID da reserva.
@@ -188,10 +171,22 @@ namespace _1classe
         /// </summary>
         public static bool operator ==(Reserva p1, Reserva p2)
         {
-            if ((p1.idReserva == p2.idReserva) && (p1.cliente == p2.cliente) && (p1.dataEntrada == p2.dataEntrada) &&
-                (p1.dataSaida == p2.dataSaida) && (p1.numeroHospedes == p2.numeroHospedes) && (p1.regime == p2.regime) && (p1.valor == p2.valor))
+            if (ReferenceEquals(p1, null) && ReferenceEquals(p2, null))
+            {
                 return true;
-            return false;
+            }
+
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null))
+            {
+                return false;
+            }
+
+            return p1.idReserva == p2.idReserva &&
+                   p1.numeroHospedes == p2.numeroHospedes &&
+                   p1.dataEntrada == p2.dataEntrada &&
+                   p1.dataSaida == p2.dataSaida &&
+                   p1.regime == p2.regime &&
+                   p1.valor == p2.valor;
         }
 
         /// <summary>
@@ -199,9 +194,7 @@ namespace _1classe
         /// </summary>
         public static bool operator !=(Reserva p1, Reserva p2)
         {
-            if (p1 == p2)
-                return false;
-            return true;
+            return !(p1 == p2);
         }
 
         #endregion
@@ -213,7 +206,7 @@ namespace _1classe
         /// </summary>
         public override string ToString()
         {
-            return String.Format("Id Reserva: {0} - Cliente: {1} - Número Hospedes: {2} - Data Entrada: {3} - Data Saída: {4} - Regime: {5} - Valor: {6}", idReserva.ToString(), cliente.NomeCliente, numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString());
+            return String.Format("Id Reserva: {0} - Número Hospedes: {1} - Data Entrada: {2} - Data Saída: {3} - Regime: {4} - Valor: {5}", idReserva.ToString(), numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString());
         }
 
         /// <summary>

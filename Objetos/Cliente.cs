@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2classe;
 
-namespace _1classe
+
+namespace Objetos
 {
     /// <summary>
     /// Classe que representa um cliente.
@@ -156,9 +156,20 @@ namespace _1classe
         /// </summary>
         public static bool operator ==(Cliente p1, Cliente p2)
         {
+            if (ReferenceEquals(p1, p2))
+            {
+                return true;
+            }
+
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null))
+            {
+                return false;
+            }
             if ((p1.idCliente == p2.idCliente) && (p1.nomeCliente == p2.nomeCliente) && (p1.nifCliente == p2.nifCliente) &&
                 (p1.moradaCliente == p2.moradaCliente) && (p1.telemovelCliente == p2.telemovelCliente))
+            {
                 return true;
+            }
             return false;
         }
 
@@ -168,7 +179,7 @@ namespace _1classe
         public static bool operator !=(Cliente p1, Cliente p2)
         {
             if (p1 == p2)
-                return false;
+            {  return false; }
             return true;
         }
         #endregion
@@ -197,6 +208,20 @@ namespace _1classe
                 }
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                int hash = 17;
+                hash = hash * 23 + idCliente.GetHashCode();
+                hash = hash * 23 + nomeCliente.GetHashCode();
+                hash = hash * 23 + nifCliente.GetHashCode();
+                hash = hash * 23 + moradaCliente.GetHashCode();
+                hash = hash * 23 + telemovelCliente.GetHashCode();
+                return hash;
+            }
         }
         #endregion
         #endregion

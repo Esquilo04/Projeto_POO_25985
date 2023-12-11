@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _2classe;
 
-namespace _1classe
+
+namespace Objetos
 {
     /// <summary>
     /// Classe que representa um check-in de um cliente em um hotel.

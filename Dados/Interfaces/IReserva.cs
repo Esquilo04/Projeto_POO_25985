@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objetos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,11 @@ namespace _1classe
 {
     internal interface IReserva
     {
+
+        int ObterProximoIdReservaDisponivel();
+
+        bool AdicionarReserva(Reserva r);
+
+
     }
 }

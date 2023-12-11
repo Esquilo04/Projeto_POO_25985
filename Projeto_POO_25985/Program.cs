@@ -12,8 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _1classe;
-using _2classe;
+using Regras_de_negocio;
 
 namespace Projeto_POO_25985
 {
@@ -21,7 +20,7 @@ namespace Projeto_POO_25985
     {
         static void Main(string[] args)
         {
-
+            Menu menu = new Menu();
         }
     }
 }

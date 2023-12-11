@@ -12,9 +12,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using _1classe;
 
-namespace _2classe
+
+namespace Objetos
 {
     /// <summary>
     /// Classe que representa um registo de cliente associado a um alojamento.

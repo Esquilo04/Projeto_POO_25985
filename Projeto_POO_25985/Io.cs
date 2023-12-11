@@ -9,11 +9,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
-using _1classe;
-using _2classe;
+using Dados;
+using Objetos;
 
 namespace Projeto_POO_25985
 {
@@ -34,7 +37,70 @@ namespace Projeto_POO_25985
         /// Adiciona um novo cliente.
         /// </summary>
         /// <param name="cliente">O cliente a ser adicionado</param>
-        void adiconarCliente(Cliente cliente) { }
+        public void AdicionarCliente(out string nome, out int nif, out string morada, out int tel)
+        {
+            Console.WriteLine("Qual o nome do cliente?");
+            nome = Console.ReadLine();
+
+            Console.WriteLine("Qual o NIF do cliente?");
+            nif = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Qual a morada do cliente?");
+            morada = Console.ReadLine();
+
+            Console.WriteLine("Qual o telemovel do cliente?");
+            tel = int.Parse(Console.ReadLine());
+        }
+
+        public void ObterIdCliente(out int id)
+        {
+            Console.WriteLine("Qual o ID do cliente?");
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+            
+        }
+
+
+        public int AlterarDadoCliente(out int dado)
+        {
+            int aux = 0;
+            bool entradaValida = false;
+
+            while (!entradaValida)
+            {
+                Console.WriteLine("Qual o dado que deseja alterar?");
+                Console.WriteLine("1 - Nome do cliente.");
+                Console.WriteLine("2 - Nif do cliente.");
+                Console.WriteLine("3 - Morada do cliente.");
+                Console.WriteLine("4 - Telemovel do cliente.");
+                aux = int.Parse(Console.ReadLine());
+
+                if (aux >= 1 && aux <= 4)
+                {
+                    entradaValida = true;
+                }
+                else
+                {
+                    Console.WriteLine("Introduza uma opção válida.");
+                }
+            }
+            dado = aux;
+            return aux; // Se necessário, você pode retornar o valor escolhido
+        }
+
+        public void MenuClientes(out int opcao)
+        {
+            Console.WriteLine("\nO que deseja fazer?");
+            Console.WriteLine("1 - Adicionar cliente");
+            Console.WriteLine("2 - Apagar cliente");
+            Console.WriteLine("3 - Mostrar todos os clientes");
+            Console.WriteLine("4 - Mostrar determinado cliente");
+            Console.WriteLine("5 - Alterar determinado dado do cliente");
+            Console.WriteLine("0 - Sair");
+            opcao = int.Parse(Console.ReadLine());
+        }
 
         #endregion
 
@@ -44,7 +110,7 @@ namespace Projeto_POO_25985
         /// <summary>
         /// Region utilizada para operações de I/O relacionadas com Check-in.
         /// </summary>
-   
+
 
 
         /// <summary>
@@ -113,12 +179,154 @@ namespace Projeto_POO_25985
         /// </summary>
 
 
+        public void AdicionarAlojamento(out string morada, out int numeroQuartos, out int classificacao, out int disponibilidade)
+        {
+            Console.WriteLine("Qual a morada do alojamento?");
+            morada = Console.ReadLine();
 
-        /// <summary>
-        /// Altera a morada de um alojamento.
-        /// </summary>
-        void alterarMoradaAlojamento(Alojamento alojamento) { }
+            Console.WriteLine("Quantos quartos tem o alojamento?");
+            numeroQuartos = int.Parse(Console.ReadLine());
 
+            Console.WriteLine("Qual a classificacao do alojamento?");
+            classificacao = int.Parse(Console.ReadLine());
+
+            disponibilidade = 0;  //começa em 0 pois está disponivel
+        }
+
+        public void ObterIdAlojamento(out int id)
+        {
+            Console.WriteLine("Qual o ID do alojamento?");
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+        }
+
+        public void MenuAlojamentos(out int opcao2)
+        {
+            Console.WriteLine("\nO que deseja fazer?");
+            Console.WriteLine("1 - Adicionar alojamento");
+            Console.WriteLine("2 - Apagar alojamento");
+            Console.WriteLine("3 - Mostrar todos os alojamentos");
+            Console.WriteLine("4 - Mostrar determinado alojamento");
+            Console.WriteLine("5 - Alterar determinado dado de determinado alojamento");
+            Console.WriteLine("0 - Sair");
+            opcao2 = int.Parse(Console.ReadLine());
+        }
+
+        public int AlterarDadoAlojamento(out int dado)
+        {
+            int aux = 0;
+            bool entradaValida = false;
+
+            while (!entradaValida)
+            {
+                Console.WriteLine("Qual o dado que deseja alterar?");
+                Console.WriteLine("1 - Morada do alojamento.");
+                Console.WriteLine("2 - Numero de quartos.");
+                Console.WriteLine("3 - Classificacao do alojamento.");
+                aux = int.Parse(Console.ReadLine());
+
+                if (aux >= 1 && aux <= 3)
+                {
+                    entradaValida = true;
+                }
+                else
+                {
+                    Console.WriteLine("Introduza uma opção válida.");
+                }
+            }
+            dado = aux;
+            return aux; // Se necessário, você pode retornar o valor escolhido
+        }
+
+
+        public void MenuGestor(out int opcaogestor)
+        {
+            Console.WriteLine("\nO que deseja fazer?");
+            Console.WriteLine("1 - Gerir dados dos Clientes");
+            Console.WriteLine("2 - Gerir dados dos Alojamentos");
+            Console.WriteLine("3 - Gerir dados das Reservas");
+            Console.WriteLine("0 - Sair");
+            opcaogestor = int.Parse(Console.ReadLine());
+        }
+
+        #endregion
+
+
+        #region Reserva
+
+        public string ConverterRegime()
+        {
+            bool entradaValida = false;
+            string regimeConvertido = "";
+
+            while (!entradaValida)
+            {
+                Console.WriteLine("Qual o regime da reserva?");
+                Console.WriteLine("1 - Meia Pensão.");
+                Console.WriteLine("2 - Pensão Completa.");
+                Console.WriteLine("3 - Tudo Incluído.");
+
+                string opcaoRegime = Console.ReadLine();
+
+                switch (opcaoRegime)
+                {
+                    case "1":
+                        regimeConvertido = "mp";
+                        entradaValida = true;
+                        break;
+                    case "2":
+                        regimeConvertido = "pc";
+                        entradaValida = true;
+                        break;
+                    case "3":
+                        regimeConvertido = "ti";
+                        entradaValida = true;
+                        break;
+                    default:
+                        Console.WriteLine("Opção inválida. Por favor, selecione 1, 2 ou 3.");
+                        break;
+                }
+            }
+            return regimeConvertido;
+        }
+
+        public void AdicionarReserva(out int numeroHospedes, out DateTime dataEntrada, out DateTime dataSaida, out string regime)
+        {
+
+            Console.WriteLine("Quantos hóspedes na reserva?");
+            numeroHospedes = int.Parse(Console.ReadLine());
+
+            Console.WriteLine("Qual a data de entrada (dd/mm/aaaa)?");
+            dataEntrada = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            Console.WriteLine("Qual a data de saída (dd/mm/aaaa)?");
+            dataSaida = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+
+            regime = ConverterRegime();
+
+        }
+
+        public void MenuReservas(out int opcao3)
+        {
+            Console.WriteLine("\nO que deseja fazer?");
+            Console.WriteLine("1 - Adicionar reserva");
+            Console.WriteLine("2 - Apagar reserva");
+            Console.WriteLine("3 - Mostrar todas as reservas");
+            Console.WriteLine("4 - Mostrar determinada reserva");
+            Console.WriteLine("0 - Sair");
+            opcao3 = int.Parse(Console.ReadLine());
+        }
+
+        public void ObterIdReserva(out int id)
+        {
+            Console.WriteLine("Qual o ID da reserva?");
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+        }
         #endregion
     }
 }

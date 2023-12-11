@@ -210,6 +210,8 @@ namespace Projeto_POO_25985
             Console.WriteLine("3 - Mostrar todos os alojamentos");
             Console.WriteLine("4 - Mostrar determinado alojamento");
             Console.WriteLine("5 - Alterar determinado dado de determinado alojamento");
+            Console.WriteLine("6 - Alterar disponibilidade de determinado alojamento");
+            Console.WriteLine("7 - Mostrar alojamentos disponiveis");
             Console.WriteLine("0 - Sair");
             opcao2 = int.Parse(Console.ReadLine());
         }
@@ -315,6 +317,7 @@ namespace Projeto_POO_25985
             Console.WriteLine("2 - Apagar reserva");
             Console.WriteLine("3 - Mostrar todas as reservas");
             Console.WriteLine("4 - Mostrar determinada reserva");
+            Console.WriteLine("5 - Alterar determinado dado de determinada reserva");
             Console.WriteLine("0 - Sair");
             opcao3 = int.Parse(Console.ReadLine());
         }
@@ -326,6 +329,33 @@ namespace Projeto_POO_25985
             {
                 id = int.Parse(Console.ReadLine());
             }
+        }
+
+        public int AlterarDadoReserva(out int dado)
+        {
+            int aux = 0;
+            bool entradaValida = false;
+
+            while (!entradaValida)
+            {
+                Console.WriteLine("Qual o dado que deseja alterar?");
+                Console.WriteLine("1 - Numero de hospedes da reserva.");
+                Console.WriteLine("2 - Data de entrada.");
+                Console.WriteLine("3 - Data de saida.");
+                Console.WriteLine("4 - Regime da estadia.");
+                aux = int.Parse(Console.ReadLine());
+
+                if (aux >= 1 && aux <= 4)
+                {
+                    entradaValida = true;
+                }
+                else
+                {
+                    Console.WriteLine("Introduza uma opção válida.");
+                }
+            }
+            dado = aux;
+            return aux;
         }
         #endregion
     }

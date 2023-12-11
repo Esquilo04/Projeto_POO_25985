@@ -176,7 +176,7 @@ namespace Regras_de_negocio
 
             if (alojamentoEncontrado == null)
             {
-                Console.WriteLine("Cliente não encontrado.");
+                Console.WriteLine("Alojamento não encontrado.");
             }
 
             return alojamentoEncontrado;
@@ -224,6 +224,31 @@ namespace Regras_de_negocio
             io.ObterIdAlojamento(out id);
             io.AlterarDadoAlojamento(out dado);
             alojamentos.AlterarDadoAlojamento(dado, id);
+        }
+
+        public void AlterarDisponibilidadeAlojamento()
+        {
+            int id;
+            io.ObterIdAlojamento(out id);
+            alojamentos.AlterarDisponibilidadeAlojamento(id);
+        }
+
+        public void MostrarAlojamentosDisponiveis()
+        {
+            List<Alojamento> alojamentosDisponiveis = alojamentos.MostrarAlojamentosDisponiveis();
+
+            if (alojamentosDisponiveis.Count > 0)
+            {
+                Console.WriteLine("Alojamentos disponíveis:");
+                foreach (Alojamento alojamento in alojamentosDisponiveis)
+                {
+                    Console.WriteLine(alojamento.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("Não existe nenhum alojamento disponível.");
+            }
         }
         #endregion
 
@@ -308,6 +333,14 @@ namespace Regras_de_negocio
             }
 
             return reservaEncontrado;
+        }
+
+        public void AlterarDadosReservas()
+        {
+            int id, dado;
+            io.ObterIdReserva(out id);
+            io.AlterarDadoReserva(out dado);
+            reservas.AlterarDadoReserva(dado, id);
         }
         #endregion
     }

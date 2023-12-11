@@ -1,4 +1,5 @@
-﻿using Dados;
+﻿using _2classe;
+using Dados;
 using Objetos;
 using System;
 using System.Collections.Generic;
@@ -221,6 +222,48 @@ namespace Dados
                 }
             }
             return false;
+        }
+
+        public bool AlterarDisponibilidadeAlojamento(int id)
+        {
+            foreach (Alojamento alojamento in alojamentos)
+            {
+                if (alojamento.IdAlojamento == id)
+                {
+                    if (alojamento.Disponibilidade == 1)
+                    {
+                        alojamento.Disponibilidade = 0;
+                        Console.WriteLine("Disponibilidade do alojamento alterada para: Disponivel");
+                    }
+                    else if (alojamento.Disponibilidade == 0)
+                    {
+                        alojamento.Disponibilidade = 1;
+                        Console.WriteLine("Disponibilidade do alojamento alterada para: Indisponivel");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Algo está errado pois o regime deveria ser 0 ou 1.");
+                    }
+                    return true; 
+                }
+            }
+            Console.WriteLine("Alojamento não encontrado.");
+            return false; 
+        }
+
+        public List<Alojamento> MostrarAlojamentosDisponiveis()
+        {
+            List<Alojamento> alojamentosDisponiveis = new List<Alojamento>();
+
+            foreach (Alojamento alojamento in ALOJAMENTOS)
+            {
+                if (alojamento.Disponibilidade == 0)
+                {
+                    alojamentosDisponiveis.Add(alojamento);
+                }
+            }
+
+            return alojamentosDisponiveis;
         }
         #endregion
     }

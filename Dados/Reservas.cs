@@ -203,6 +203,40 @@ namespace Dados
             return null;
         }
 
+
+        public bool AlterarDadoReserva(int opcao, int id)
+        {
+            foreach (Reserva reserva in reservas)
+            {
+                if (reserva.IdReserva == id)
+                {
+                    switch (opcao)
+                    {
+                        case 1:
+                            Console.WriteLine("Qual o numero de hospedes?");
+                            int numeroHospedes = int.Parse(Console.ReadLine());
+                            reserva.NumeroHospedes = numeroHospedes;
+                            break;
+                        case 2:
+                            Console.WriteLine("Qual a nova data de entrada? (dd/mm/aaaa)");
+                            DateTime dataEntrada = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            reserva.DataEntrada = dataEntrada;
+                            break;
+                        case 3:
+                            Console.WriteLine("Qual a nova data de saida? (dd/mm/aaaa)");
+                            DateTime dataSaida = DateTime.ParseExact(Console.ReadLine(), "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                            reserva.DataSaida = dataSaida;
+                            break;
+                        case 4:
+                            Console.WriteLine("Qual o novo regime?");
+                            string regime = Console.ReadLine();
+                            reserva.Regime = regime;
+                            break;
+                    }
+                }
+            }
+            return false;
+        }
         #endregion
     }
 }

@@ -136,6 +136,12 @@ namespace Projeto_POO_25985
                         case 5:
                             regras.AlterarDadosAlojamentos();
                             break;
+                        case 6:
+                            regras.AlterarDisponibilidadeAlojamento();
+                            break;
+                        case 7:
+                            regras.MostrarAlojamentosDisponiveis();
+                            break;
                         default:
                             Console.Clear();
                             Console.WriteLine("Opção inválida!");
@@ -182,6 +188,9 @@ namespace Projeto_POO_25985
 
                     case 4:
                         regras.MostrarDadosReservaPorId();
+                        break;
+                    case 5:
+                        regras.AlterarDadosReservas();
                         break;
 
                     default:

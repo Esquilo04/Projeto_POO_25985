@@ -136,7 +136,7 @@ namespace Objetos
         {
             set
             {
-                if (value > 0)
+                if (value == 0 || value == 1) // Aceitar apenas 0 ou 1
                     disponibilidade = value;
             }
             get

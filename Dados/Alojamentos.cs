@@ -85,6 +85,23 @@ namespace Dados
             return false;
         }
 
+        public bool VerificarAlojamentoDisponivel(int id)
+        {
+            foreach (Alojamento alojamento in alojamentos)
+            {
+                if (alojamento.IdAlojamento == id)
+                {
+                    if(alojamento.Disponibilidade == 0)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
+
         public bool GuardarAlojamentos(string a)
         {
             try
@@ -93,7 +110,7 @@ namespace Dados
                 {
                     foreach (var alojamentos in alojamentos)
                     {
-                        writer.WriteLine($"{alojamentos.IdAlojamento}#{alojamentos.MoradaAlojamento}#{alojamentos.NumeroQuartos}#{alojamentos.ClassificacaoAlojamento}#{alojamentos.Disponibilidade}");
+                        writer.WriteLine($"{alojamentos.IdAlojamento}#{alojamentos.MoradaAlojamento}#{alojamentos.NumeroQuartos}#{alojamentos.ClassificacaoAlojamento}#{alojamentos.Disponibilidade}#{alojamentos.ValorNoite}");
                     }
                 }
                 return true;
@@ -120,8 +137,10 @@ namespace Dados
                         int numeroQuartos = int.Parse(sdados[2]);
                         int classificacao = int.Parse(sdados[3]);
                         int disponibilidade = int.Parse(sdados[4]);
+                        int valorNoite = int.Parse(sdados[5]);
 
-                        Alojamento alojamento = new Alojamento(id, morada, numeroQuartos, classificacao, disponibilidade);
+
+                        Alojamento alojamento = new Alojamento(id, morada, numeroQuartos, classificacao, disponibilidade, valorNoite);
 
                         alojamentos.Add(alojamento);
 
@@ -192,6 +211,18 @@ namespace Dados
             }
 
             return proximoId; // Se não houver IDs disponíveis entre os existentes, retorna o próximo número
+        }
+
+        public int ObterValorNoitePorId(int id)
+        {
+            foreach (Alojamento alojamento in alojamentos)
+            {
+                if (alojamento.IdAlojamento == id)
+                {
+                    return alojamento.ValorNoite;
+                }
+            }
+            return -1;
         }
 
 

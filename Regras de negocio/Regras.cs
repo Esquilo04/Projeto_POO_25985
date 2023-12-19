@@ -16,6 +16,7 @@ namespace Regras_de_negocio
         private Clientes clientes;
         private Alojamentos alojamentos;
         private Reservas reservas;
+        private Check_Ins check_Ins;
         private Io io;
 
         public Regras()
@@ -23,6 +24,7 @@ namespace Regras_de_negocio
             clientes = new Clientes();
             alojamentos = new Alojamentos();
             reservas = new Reservas();
+            check_Ins = new Check_Ins();
             io = new Io();
         }
 
@@ -135,13 +137,13 @@ namespace Regras_de_negocio
 
         public bool AdicionarAlojamento()
         {
-            int numeroQuartos, classificacao, disponibilidade;
+            int numeroQuartos, classificacao, disponibilidade, valorNoite;
             string morada;
-            io.AdicionarAlojamento(out morada, out numeroQuartos, out classificacao, out disponibilidade);
+            io.AdicionarAlojamento(out morada, out numeroQuartos, out classificacao, out disponibilidade, out valorNoite);
             int id = alojamentos.ObterProximoIdAlojamentoDisponivel();
 
 
-            Alojamento a = new Alojamento(id, morada, numeroQuartos, classificacao, disponibilidade);
+            Alojamento a = new Alojamento(id, morada, numeroQuartos, classificacao, disponibilidade, valorNoite);
             if (id > 0)
             {
                 if (!alojamentos.VerificarIdAlojamentoExistente(id))
@@ -250,6 +252,7 @@ namespace Regras_de_negocio
                 Console.WriteLine("Não existe nenhum alojamento disponível.");
             }
         }
+
         #endregion
 
 
@@ -258,16 +261,20 @@ namespace Regras_de_negocio
 
         public bool AdicionarReserva()
         {
-            int id, numeroHospedes, valor;
+            int idReserva, numeroHospedes, valor, idAlojamentoReserva, valorNoite;
             DateTime dataEntrada, dataSaida;
             string regime;
             io.AdicionarReserva(out numeroHospedes, out dataEntrada, out dataSaida, out regime);
-            id = reservas.ObterProximoIdReservaDisponivel();
-            reservas.CalcularValorDaReserva(numeroHospedes, dataEntrada, dataSaida, regime, out valor);
+            MostrarAlojamentosDisponiveis();
+            idAlojamentoReserva = int.Parse(Console.ReadLine());
+            alojamentos.VerificarAlojamentoDisponivel(idAlojamentoReserva);
+            valorNoite = alojamentos.ObterValorNoitePorId(idAlojamentoReserva);
+            idReserva = reservas.ObterProximoIdReservaDisponivel();
+            valor = reservas.CalcularValorDaReserva(numeroHospedes, dataEntrada, dataSaida, regime, valorNoite);
             
 
-            Reserva r = new Reserva(id, numeroHospedes, dataEntrada, dataSaida, regime, valor);
-            if (id > 0)
+            Reserva r = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva);
+            if (idReserva > 0)
             {
                     reservas.AdicionarReserva(r);
                     return true;
@@ -312,6 +319,7 @@ namespace Regras_de_negocio
             if (reservaEncontrada != null)
             {
                 reservas.RemoverReserva(reservaEncontrada);
+                Console.WriteLine("Reserva removido com sucesso!");
                 return true;
             }
             else
@@ -320,6 +328,20 @@ namespace Regras_de_negocio
             }
         }
 
+        public bool ApagarReservaPorId2(int id)
+        {
+            Reserva reservaEncontrada = reservas.ObterReservaPorId(id);
+
+            if (reservaEncontrada != null)
+            {
+                reservas.RemoverReserva(reservaEncontrada);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         public Reserva MostrarDadosReservaPorId()
         {
             int id;
@@ -337,11 +359,115 @@ namespace Regras_de_negocio
 
         public void AlterarDadosReservas()
         {
-            int id, dado;
-            io.ObterIdReserva(out id);
+            int idReserva, dado, idAlojamento, valorNoite;
+            io.ObterIdReserva(out idReserva);
             io.AlterarDadoReserva(out dado);
-            reservas.AlterarDadoReserva(dado, id);
+
+            idAlojamento = reservas.ObterIdAlojamento(idReserva);
+            valorNoite = alojamentos.ObterValorNoitePorId(idAlojamento);
+            reservas.AlterarDadoReserva(dado, idReserva, valorNoite);
         }
+        #endregion
+
+
+        #region Check_In
+
+
+        public bool EfetuarCheck_In()
+        {
+            int idCheck_In, idCliente, idReserva, idAlojamento;
+            DateTime dataCheck_In, dataCheck_Out=default;
+
+            idCheck_In = check_Ins.ObterProximoIdCheck_InDisponivel();
+            MostrarReservas();
+            Console.WriteLine("Qual o id da reserva que deseja efetuar Check_In?");
+            idReserva = int.Parse(Console.ReadLine());
+            if (!reservas.VerificarIdReservaExistente(idReserva))
+            {
+                Console.WriteLine("Id da reserva nao existe.");
+                return false;
+            }
+            MostrarClientes();
+            Console.WriteLine("Qual o id do Cliente que deseja efetuar Check_In?");
+            idCliente = int.Parse(Console.ReadLine());
+            if(!clientes.VerificarIdExistente(idCliente))
+            {
+                Console.WriteLine("Id do cliente nao existe.");
+                return false;
+            }
+            idAlojamento = reservas.ObterIdAlojamento(idReserva);
+            ApagarReservaPorId2(idReserva);
+            alojamentos.AlterarDisponibilidadeAlojamento(idAlojamento);
+            dataCheck_In = DateTime.Now;
+
+            Check_In c = new Check_In(idCheck_In, idCliente, idReserva, idAlojamento, dataCheck_In, dataCheck_Out, 0);
+
+            if(idCheck_In > 0)
+            {
+                check_Ins.EfetuarCheck_In(c);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Id inferior a 0");
+            }
+            return false;
+        }
+
+        public void MostrarCheck_Ins()
+        {
+            Console.WriteLine("\nDados dos Check_Ins:");
+            check_Ins.MostrarCheck_Ins();
+        }
+
+        public void MostrarCheck_InsPendentes()
+        {
+            check_Ins.MostrarCheck_InsPendentes();
+        }
+
+        public void GuardarCheck_Ins(string c)
+        {
+            check_Ins.GuardarCheck_Ins(c);
+        }
+
+        public void LerCheck_Ins(string c)
+        {
+            check_Ins.LerCheck_Ins(c);
+        }
+
+        public int MenuCheck_Ins()
+        {
+            int opcao4;
+            io.MenuCheck_Ins(out opcao4);
+            return opcao4;
+        }
+
+        public bool ApagarCheck_InPorId()
+        {
+            int id;
+            io.ObterIdCheck_In(out id);
+
+            Check_In check_InEncontrado = check_Ins.ObterCheck_InPorId(id);
+
+            if (check_InEncontrado != null)
+            {
+                check_Ins.RemoverCheck_In(check_InEncontrado);
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Check_In não encontrado.");
+                return false;
+            }
+        }
+
+        public void EfetuarCheck_Out()
+        {
+            int id;
+            io.ObterIdCheck_In(out id);
+            check_Ins.EfetuarCheck_Out(id);
+        }
+
         #endregion
     }
 }

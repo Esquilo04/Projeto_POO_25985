@@ -30,6 +30,7 @@ namespace Objetos
         private int numeroQuartos;              // Número de quartos no alojamento
         private int classificacaoAlojamento;    // Classificação do alojamento (1 a 5)
         private int disponibilidade;            // 0 ou 1. 0->disponivel    1->ocupado
+        private int valorNoite;
         #endregion
 
         #region Comportamentos
@@ -46,6 +47,7 @@ namespace Objetos
             numeroQuartos = 0;
             classificacaoAlojamento = 0;
             disponibilidade = 0;
+            valorNoite = 0;
         }
 
         /// <summary>
@@ -56,13 +58,14 @@ namespace Objetos
         /// <param name="numeroQuartos">Número de quartos</param>
         /// <param name="classificacaoAlojamento">Classificação do alojamento</param>
         /// <param name="disponibilidade">Disponibilidade do alojamento</param>
-        public Alojamento(int idAlojamento, string moradaAlojamento, int numeroQuartos, int classificacaoAlojamento, int disponibilidade)
+        public Alojamento(int idAlojamento, string moradaAlojamento, int numeroQuartos, int classificacaoAlojamento, int disponibilidade, int valorNoite)
         {
             this.idAlojamento = idAlojamento;
             this.moradaAlojamento = moradaAlojamento;
             this.numeroQuartos = numeroQuartos;
             this.classificacaoAlojamento = classificacaoAlojamento;
             this.disponibilidade = disponibilidade;
+            this.valorNoite = valorNoite;
         }
 
         #endregion
@@ -145,6 +148,22 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o valor da noite do alojamento.
+        /// </summary>
+        public int ValorNoite
+        {
+            set
+            {
+                if (value > 0)
+                    valorNoite = value;
+            }
+            get
+            {
+                return valorNoite;
+            }
+        }
+
         #endregion
 
         #region Operadores
@@ -162,7 +181,7 @@ namespace Objetos
             {
                 return false;
             }
-            return (p1.idAlojamento == p2.idAlojamento) && (p1.moradaAlojamento == p2.moradaAlojamento) && (p1.numeroQuartos == p2.numeroQuartos) && (p1.classificacaoAlojamento == p2.classificacaoAlojamento) && (p1.disponibilidade == p2.disponibilidade);
+            return (p1.idAlojamento == p2.idAlojamento) && (p1.moradaAlojamento == p2.moradaAlojamento) && (p1.numeroQuartos == p2.numeroQuartos) && (p1.classificacaoAlojamento == p2.classificacaoAlojamento) && (p1.disponibilidade == p2.disponibilidade) && (p1.valorNoite == p2.valorNoite);
         }
 
         /// <summary>
@@ -182,7 +201,7 @@ namespace Objetos
         /// </summary>
         public override string ToString()
         {
-            return String.Format("Id Alojamento: {0} - Morada Alojamento: {1} - Número Quartos: {2} - Classificação Alojamento: {3} - Disponibilidade: {4}", idAlojamento.ToString(), moradaAlojamento, numeroQuartos.ToString(), classificacaoAlojamento.ToString(), disponibilidade.ToString());
+            return String.Format("Id Alojamento: {0} - Morada Alojamento: {1} - Número Quartos: {2} - Classificação Alojamento: {3} - Disponibilidade: {4} - Valor por noite: {5}", idAlojamento.ToString(), moradaAlojamento, numeroQuartos.ToString(), classificacaoAlojamento.ToString(), disponibilidade.ToString(), valorNoite.ToString());
         }
 
         /// <summary>

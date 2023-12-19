@@ -16,10 +16,12 @@ namespace Projeto_POO_25985
             String d = @"Clientes.txt";
             String a = @"Alojamentos.txt";
             String r = @"Reservas.txt";
+            String c = @"Check_Ins.txt";
 
             regras.LerClientes(d);
             regras.LerAlojamentos(a);
             regras.LerReservas(r);
+            regras.LerCheck_Ins(c);
             bool sair = false;
             
             while (!sair)
@@ -44,6 +46,9 @@ namespace Projeto_POO_25985
 
                     case 3:
                         GerirMenuReservas(r);
+                        break;
+                    case 4:
+                        GerirMenuCheck_Ins(c);
                         break;
                     default:
                         Console.Clear();
@@ -208,5 +213,54 @@ namespace Projeto_POO_25985
         }
 
 
+        public void GerirMenuCheck_Ins(string c)
+        {
+            int opcaoCheck_In = regras.MenuCheck_Ins();
+            bool sair = false;
+
+            while (!sair)
+            {
+                Console.Clear();
+
+                switch (opcaoCheck_In)
+                {
+                    case 0:
+                        sair = true;
+                        Console.WriteLine("Saindo do menu de check_ins...");
+                        break;
+
+                    case 1:
+                        regras.EfetuarCheck_In();
+                        break;
+
+                    case 2:
+                        regras.ApagarCheck_InPorId();
+                        break;
+
+                    case 3:
+                        regras.MostrarCheck_Ins();
+                        break;
+
+                    case 4:
+                        regras.MostrarCheck_InsPendentes();
+                        break;
+                    case 5:
+                        regras.MostrarCheck_InsPendentes();
+                        regras.EfetuarCheck_Out();
+                        break;
+
+                    default:
+                        Console.Clear();
+                        Console.WriteLine("Opção inválida!");
+                        break;
+                }
+
+                if (!sair)
+                {
+                    opcaoCheck_In = regras.MenuCheck_Ins();
+                }
+            }
+            regras.GuardarCheck_Ins(c);
+        }
     }
 }

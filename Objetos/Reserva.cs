@@ -22,13 +22,13 @@ namespace Objetos
     public class Reserva
     {
         #region Estado
-        private Cliente cliente;          // Cliente associado à reserva
         private int idReserva;           // ID da reserva
         private int numeroHospedes;      // Número de hóspedes na reserva
         private DateTime dataEntrada;    // Data de entrada na reserva
         private DateTime dataSaida;      // Data de saída da reserva
         private string regime;           // Regime da reserva (ex: meia-pensão, pensão completa, etc.)
         private int valor;               // Valor da estadia
+        private int idAlojamentoReserva;
         #endregion
 
         #region Comportamentos
@@ -46,6 +46,7 @@ namespace Objetos
             dataSaida = DateTime.Now;
             regime = "";
             valor = 0;
+            idAlojamentoReserva = 0;
         }
 
         /// <summary>
@@ -57,7 +58,8 @@ namespace Objetos
         /// <param name="dataSaida">Data de saída</param>
         /// <param name="regime">Regime da estadia</param>
         /// <param name="valor">Valor da estadia</param>
-        public Reserva(int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valor)
+        /// 
+        public Reserva(int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valor, int idAlojamentoReserva)
         {
             this.idReserva = idReserva;
             this.numeroHospedes = numeroHospedes;
@@ -65,6 +67,7 @@ namespace Objetos
             this.dataSaida = dataSaida;
             this.regime = regime;
             this.valor = valor;
+            this.idAlojamentoReserva = idAlojamentoReserva;
         }
 
         #endregion
@@ -162,6 +165,20 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do alojamento asociado à reserva.
+        /// </summary>
+        public int IdAlojamentoReserva
+        {
+            get
+            {
+                return idAlojamentoReserva;
+            }
+            set
+            {
+                idAlojamentoReserva = value;
+            }
+        }
         #endregion
 
         #region Operadores
@@ -186,7 +203,8 @@ namespace Objetos
                    p1.dataEntrada == p2.dataEntrada &&
                    p1.dataSaida == p2.dataSaida &&
                    p1.regime == p2.regime &&
-                   p1.valor == p2.valor;
+                   p1.valor == p2.valor &&
+                   p1.idAlojamentoReserva == p2.idAlojamentoReserva;
         }
 
         /// <summary>
@@ -206,7 +224,7 @@ namespace Objetos
         /// </summary>
         public override string ToString()
         {
-            return String.Format("Id Reserva: {0} - Número Hospedes: {1} - Data Entrada: {2} - Data Saída: {3} - Regime: {4} - Valor: {5}", idReserva.ToString(), numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString());
+            return String.Format("Id Reserva: {0} - Número Hospedes: {1} - Data Entrada: {2} - Data Saída: {3} - Regime: {4} - Valor: {5} - Id do alojamento: {6}", idReserva.ToString(), numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString(), idAlojamentoReserva.ToString());
         }
 
         /// <summary>

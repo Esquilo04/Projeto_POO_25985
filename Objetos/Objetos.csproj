@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alojamento.cs" />
-    <Compile Include="Check_in.cs" />
+    <Compile Include="Check_In.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Consulta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

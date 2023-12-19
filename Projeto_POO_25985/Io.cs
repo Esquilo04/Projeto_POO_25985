@@ -106,40 +106,6 @@ namespace Projeto_POO_25985
 
 
 
-        #region Check_in
-        /// <summary>
-        /// Region utilizada para operações de I/O relacionadas com Check-in.
-        /// </summary>
-
-
-
-        /// <summary>
-        /// Realiza o check-in de um cliente.
-        /// </summary>
-        /// <param name="check_in">O objeto Check_in associado ao check-in</param>
-        void fazerCheck_in(Check_in check_in) { }
-
-        #endregion
-
-
-
-        #region Reserva
-        /// <summary>
-        /// Region utilizada para operações de I/O relacionadas com Reservas.
-        /// </summary>
-
-
-
-        /// <summary>
-        /// Faz uma reserva de alojamento.
-        /// </summary>
-        /// <param name="reserva">O objeto Reserva associado à reserva</param>
-        void fazerReserva(Reserva reserva) { }
-
-        #endregion
-
-
-
         #region Consulta
         /// <summary>
         /// Region utilizada para operações de I/O relacionadas com Consultas de Dados de Clientes e Alojamentos.
@@ -179,7 +145,7 @@ namespace Projeto_POO_25985
         /// </summary>
 
 
-        public void AdicionarAlojamento(out string morada, out int numeroQuartos, out int classificacao, out int disponibilidade)
+        public void AdicionarAlojamento(out string morada, out int numeroQuartos, out int classificacao, out int disponibilidade, out int valorNoite)
         {
             Console.WriteLine("Qual a morada do alojamento?");
             morada = Console.ReadLine();
@@ -191,6 +157,9 @@ namespace Projeto_POO_25985
             classificacao = int.Parse(Console.ReadLine());
 
             disponibilidade = 0;  //começa em 0 pois está disponivel
+
+            Console.WriteLine("Qual o valor por noite do alojamento?");
+            valorNoite = int.Parse(Console.ReadLine());
         }
 
         public void ObterIdAlojamento(out int id)
@@ -249,11 +218,13 @@ namespace Projeto_POO_25985
             Console.WriteLine("1 - Gerir dados dos Clientes");
             Console.WriteLine("2 - Gerir dados dos Alojamentos");
             Console.WriteLine("3 - Gerir dados das Reservas");
+            Console.WriteLine("4 - Gerir dados dos Check_Ins");
             Console.WriteLine("0 - Sair");
             opcaogestor = int.Parse(Console.ReadLine());
         }
 
         #endregion
+
 
 
         #region Reserva
@@ -357,6 +328,33 @@ namespace Projeto_POO_25985
             dado = aux;
             return aux;
         }
+        #endregion
+
+
+
+        #region Check_In
+
+        public void MenuCheck_Ins(out int opcao4)
+        {
+            Console.WriteLine("\nO que deseja fazer?");
+            Console.WriteLine("1 - Efetuar Check_In");
+            Console.WriteLine("2 - Apagar Check_In");
+            Console.WriteLine("3 - Mostrar todos os Check_Ins");
+            Console.WriteLine("4 - Mostrar Check_Ins Pendentes");
+            Console.WriteLine("5 - Efetuar Check_Out");
+            Console.WriteLine("0 - Sair");
+            opcao4 = int.Parse(Console.ReadLine());
+        }
+
+        public void ObterIdCheck_In(out int id)
+        {
+            Console.WriteLine("Qual o ID do Check_In?");
+            while (!int.TryParse(Console.ReadLine(), out id))
+            {
+                id = int.Parse(Console.ReadLine());
+            }
+        }
+
         #endregion
     }
 }

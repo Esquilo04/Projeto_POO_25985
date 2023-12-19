@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alojamentos.cs" />
-    <Compile Include="Check_ins.cs" />
+    <Compile Include="Check_Ins.cs" />
     <Compile Include="Clientes.cs" />
     <Compile Include="Consultas.cs" />
     <Compile Include="Interfaces\IConsulta.cs" />

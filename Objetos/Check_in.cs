@@ -19,18 +19,20 @@ namespace Objetos
     /// <summary>
     /// Classe que representa um check-in de um cliente em um hotel.
     /// </summary>
-    public class Check_in
+    public class Check_In
     {
         /// <summary>
         /// Estado da classe Check-in.
         /// </summary>
         #region Estado
 
-        private int idCheckIn;           // ID do check-in
-        private Cliente cliente;         // Cliente associado ao check-in
-        private DateTime dataCheckIn;    // Data de entrada
-        private DateTime dataCheckOut;   // Data de saída
-        private int numeroQuarto;        // Número do quarto associado ao check-in
+        private int idCheck_In;           // ID do check-in
+        private int idCliente;
+        private int idReserva;
+        private int idAlojamento;
+        private DateTime dataCheck_In;    // Data de entrada
+        private DateTime dataCheck_Out;   // Data de saída
+        private int estadia;              //0 -> ainda nao terminou   1-> ja terminou
         #endregion
 
         #region Comportamentos
@@ -40,30 +42,34 @@ namespace Objetos
         /// <summary>
         /// Construtor por Omissão que inicializa um Check-in com valores padrão.
         /// </summary>
-        public Check_in()
+        public Check_In()
         {
-            idCheckIn = 0;
-            cliente = null;
-            dataCheckIn = DateTime.Now;
-            dataCheckOut = DateTime.Now;
-            numeroQuarto = 0;
+            idCheck_In = 0;
+            idCliente = 0;
+            idReserva = 0;
+            idAlojamento = 0;
+            dataCheck_In = DateTime.Now;
+            dataCheck_Out = DateTime.Now;
+            estadia = 0;
         }
 
         /// <summary>
         /// Construtor que permite criar um Check-in com valores específicos.
         /// </summary>
-        /// <param name="id">ID do check-in</param>
-        /// <param name="cliente">Cliente associado</param>
+        /// <param name="idCheck_In">ID do check-in</param>
+        /// <param name="idCliente">Cliente associado</param>
         /// <param name="dataCheckIn">Data de entrada</param>
         /// <param name="dataCheckOut">Data de saída</param>
         /// <param name="numeroQuarto">Número do quarto</param>
-        public Check_in(int id, Cliente cliente, DateTime dataCheckIn, DateTime dataCheckOut, int numeroQuarto)
+        public Check_In(int idCheck_In,  int idCliente, int idReserva, int idAlojamento, DateTime dataCheckIn, DateTime dataCheckOut, int estadia)
         {
-            this.idCheckIn = id;
-            this.cliente = cliente;
-            this.dataCheckIn = dataCheckIn;
-            this.dataCheckOut = dataCheckOut;
-            this.numeroQuarto = numeroQuarto;
+            this.idCheck_In = idCheck_In;
+            this.idCliente = idCliente;
+            this.idReserva = idReserva;
+            this.idAlojamento = idAlojamento;
+            this.dataCheck_In = dataCheckIn;
+            this.dataCheck_Out = dataCheckOut;
+            this.estadia = estadia;
         }
 
         #endregion
@@ -73,76 +79,97 @@ namespace Objetos
         /// <summary>
         /// Propriedade para acessar e modificar o ID do check-in.
         /// </summary>
-        public int IdCheckIn
+        public int IdCheck_In
         {
             set
             {
                 if (value > 0)
-                    idCheckIn = value;
+                    idCheck_In = value;
             }
             get
             {
-                return idCheckIn;
+                return idCheck_In;
             }
         }
 
-        /// <summary>
-        /// Propriedade para acessar e modificar o Cliente associado ao check-in.
-        /// </summary>
-        public Cliente Cliente
+        public int IdCliente
         {
-            get
-            {
-                return cliente;
-            }
             set
             {
-                cliente = value;
+                if (value > 0)
+                    idCliente = value;
+            }
+            get
+            {
+                return idCliente;
             }
         }
 
+        public int IdReserva
+        {
+            set
+            {
+                if (value > 0)
+                    idReserva = value;
+            }
+            get
+            {
+                return idReserva;
+            }
+        }
+
+        public int IdAlojamento
+        {
+            set
+            {
+                if (value > 0)
+                    idAlojamento = value;
+            }
+            get
+            {
+                return idAlojamento;
+            }
+        }
         /// <summary>
         /// Propriedade para acessar e modificar a data de entrada do check-in.
         /// </summary>
-        public DateTime DataCheckIn
+        public DateTime DataCheck_In
         {
             get
             {
-                return dataCheckIn;
+                return dataCheck_In;
             }
             set
             {
-                dataCheckIn = value;
+                dataCheck_In = value;
             }
         }
 
         /// <summary>
         /// Propriedade para acessar e modificar a data de saída do check-in.
         /// </summary>
-        public DateTime DataCheckOut
+        public DateTime DataCheck_Out
         {
             get
             {
-                return dataCheckOut;
+                return dataCheck_Out;
             }
             set
             {
-                dataCheckOut = value;
+                dataCheck_Out = value;
             }
         }
 
-        /// <summary>
-        /// Propriedade para acessar e modificar o número do quarto associado ao check-in.
-        /// </summary>
-        public int NumeroQuarto
+        public int Estadia
         {
-            get
-            {
-                return numeroQuarto;
-            }
             set
             {
-                numeroQuarto = value;
+                if (value == 0 || value == 1) // Aceitar apenas 0 ou 1
+                    estadia = value;
+            }
+            get
+            {
+                return estadia;
             }
         }
 
@@ -153,22 +180,27 @@ namespace Objetos
         /// <summary>
         /// Verifica se dois check-ins são iguais com base nos seus atributos.
         /// </summary>
-        public static bool operator ==(Check_in p1, Check_in p2)
+        public static bool operator ==(Check_In p1, Check_In p2)
         {
-            if ((p1.idCheckIn == p2.idCheckIn) && (p1.cliente == p2.cliente) && (p1.dataCheckIn == p2.dataCheckIn) &&
-                (p1.dataCheckOut == p2.dataCheckOut) && (p1.numeroQuarto == p2.numeroQuarto))
+            if (ReferenceEquals(p1, null) && ReferenceEquals(p2, null))
+            {
                 return true;
-            return false;
+            }
+            if (ReferenceEquals(p1, null) || ReferenceEquals(p2, null))
+            {
+                return false;
+            }
+
+            return (p1.idCheck_In == p2.idCheck_In) && (p1.idCliente == p2.idCliente) && (p1.idReserva == p2.idReserva) && (p1.idAlojamento == p2.idAlojamento) && (p1.dataCheck_In == p2.dataCheck_In) &&
+                (p1.dataCheck_Out == p2.dataCheck_Out) && (p1.estadia == p2.estadia);
         }
 
         /// <summary>
         /// Verifica se dois check-ins são diferentes com base nos seus atributos.
         /// </summary>
-        public static bool operator !=(Check_in p1, Check_in p2)
+        public static bool operator !=(Check_In p1, Check_In p2)
         {
-            if (p1 == p2)
-                return false;
-            return true;
+            return !(p1 == p2);
         }
 
         #endregion
@@ -180,7 +212,7 @@ namespace Objetos
         /// </summary>
         public override string ToString()
         {
-            return String.Format("Id Check-In: {0} - Cliente: {1} - Data Check-In: {2} - Data Check-Out: {3} - Número Quarto: {4}", idCheckIn.ToString(), cliente.NomeCliente, dataCheckIn.ToString(), dataCheckOut.ToString(), numeroQuarto.ToString());
+            return String.Format("Id Check_In: {0} - Id Cliente: {1} - Id Reserva {2} - Id Alojamento {3} - Data Check-In: {4} - Data Check-Out: {5} - Estadia: {6}", idCheck_In.ToString(), idCliente.ToString(), idReserva.ToString(), idAlojamento.ToString(), dataCheck_In.ToString(), dataCheck_Out.ToString(), estadia.ToString());
         }
 
         /// <summary>
@@ -188,9 +220,9 @@ namespace Objetos
         /// </summary>
         public override bool Equals(object obj)
         {
-            if (obj is Check_in)
+            if (obj is Check_In)
             {
-                Check_in p = (Check_in)obj;
+                Check_In p = (Check_In)obj;
                 if (this == p)
                 {
                     return true;

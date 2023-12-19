@@ -65,26 +65,27 @@ namespace Dados
             return true;
         }
 
-        public void CalcularValorDaReserva(int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, out int valor)
+        public int CalcularValorDaReserva(int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valorNoite)
         {
             // Calcula a diferença entre as datas de entrada e saída
             TimeSpan duracaoEstadia = dataSaida - dataEntrada;
 
             // Obtemos o número total de dias
             int numeroDias = (int)duracaoEstadia.TotalDays;
+            int valor;
 
             int custoPorDia;
             if (regime == "mp")
             {
-                custoPorDia = 50;
+                custoPorDia = 2;
             }
             else if (regime == "pc")
             {
-                custoPorDia = 80;
+                custoPorDia = 4;
             }
             else if (regime == "ti")
             {
-                custoPorDia = 100;
+                custoPorDia = 6;
             }
             else
             {
@@ -93,7 +94,8 @@ namespace Dados
             }
 
             // Calcula o valor total da reserva baseado no custo por dia, número de dias e numero de hospedes
-            valor = numeroDias * custoPorDia * numeroHospedes;
+            valor = numeroDias * custoPorDia * numeroHospedes * valorNoite;
+            return valor;
         }
 
         public void MostrarReservas()
@@ -118,7 +120,7 @@ namespace Dados
                 {
                     foreach (var reservas in reservas)
                     {
-                        writer.WriteLine($"{reservas.IdReserva}#{reservas.NumeroHospedes}#{reservas.DataEntrada}#{reservas.DataSaida}#{reservas.Regime}#{reservas.Valor}");
+                        writer.WriteLine($"{reservas.IdReserva}#{reservas.NumeroHospedes}#{reservas.DataEntrada}#{reservas.DataSaida}#{reservas.Regime}#{reservas.Valor}#{reservas.IdAlojamentoReserva}");
                     }
                 }
                 return true;
@@ -146,8 +148,10 @@ namespace Dados
                         DateTime dataSaida = DateTime.ParseExact(dados[3], "dd/MM/yyyy HH:mm:ss", CultureInfo.InvariantCulture);
                         string regime = dados[4];
                         int valor = int.Parse(dados[5]);
+                        int idAlojamentoReserva = int.Parse(dados[6]);
 
-                        Reserva reserva = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor);
+
+                        Reserva reserva = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva);
 
                         reservas.Add(reserva);
 
@@ -168,7 +172,7 @@ namespace Dados
             if (reservas.Contains(reserva))
             {
                 reservas.Remove(reserva);
-                Console.WriteLine("Reserva removido com sucesso!");
+                
             }
             else
             {
@@ -203,8 +207,20 @@ namespace Dados
             return null;
         }
 
+        public int ObterIdAlojamento(int id)
+        {
+            foreach(Reserva reserva in reservas)
+            {
+                if (reserva.IdReserva == id)
+                {
+                    return reserva.IdAlojamentoReserva;
+                }
+            }
+            return 0;
+        }
 
-        public bool AlterarDadoReserva(int opcao, int id)
+
+        public bool AlterarDadoReserva(int opcao, int id, int valorNoite)
         {
             foreach (Reserva reserva in reservas)
             {
@@ -228,15 +244,31 @@ namespace Dados
                             reserva.DataSaida = dataSaida;
                             break;
                         case 4:
-                            Console.WriteLine("Qual o novo regime?");
+                            Console.WriteLine("Qual o novo regime? mp (meia pensao), pc (pensao completa), ti (tudo incluido)");
                             string regime = Console.ReadLine();
                             reserva.Regime = regime;
                             break;
                     }
+                    reserva.Valor = CalcularValorDaReserva(reserva.NumeroHospedes, reserva.DataEntrada, reserva.DataSaida, reserva.Regime, valorNoite);
                 }
             }
             return false;
         }
+
+        public bool VerificarIdReservaExistente(int id)
+        {
+            foreach (Reserva reserva in reservas)
+            {
+                if (reserva.IdReserva == id)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+
         #endregion
     }
 }

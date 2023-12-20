@@ -1,4 +1,10 @@
-﻿using _2classe;
+﻿/*
+ * Classe responsavel por desenvolver funções relacionadas com Reservas
+ * Nuno Oliveira
+ * a25985@alunos.ipca.pt
+ * 19-12-2023
+ * POO-ESI
+ * **/
 using Dados;
 using Objetos;
 using System;
@@ -11,21 +17,29 @@ using System.Threading.Tasks;
 
 namespace Dados
 {
-    public class Reservas
+    public class Reservas : IReserva
     {
 
         #region ESTADOS
 
         private List<Reserva> reservas;
 
+        /// <summary>
+        /// Inicializa a lista de reservas no construtor
+        /// </summary>
         public Reservas()
         {
-            reservas = new List<Reserva>(); // Inicializa a lista de reservas no construtor
+            reservas = new List<Reserva>(); 
         }
 
         #endregion
 
         #region PROPRIEDADES
+
+        /// <summary>
+        /// Obtem o proximo id disponivel
+        /// </summary>
+        /// <returns></returns>
         public int ObterProximoIdReservaDisponivel()
         {
             List<int> idsExistentes = new List<int>();
@@ -59,12 +73,26 @@ namespace Dados
             return proximoId; // Se não houver IDs disponíveis entre os existentes, retorna o próximo número
         }
 
+        /// <summary>
+        /// Adiciona uma reserva à lista
+        /// </summary>
+        /// <param name="r">lista de reservas</param>
+        /// <returns></returns>
         public bool AdicionarReserva(Reserva r)
         {
             reservas.Add(r);
             return true;
         }
 
+        /// <summary>
+        /// Calcula o valor da estadia multiplicando as variaveis
+        /// </summary>
+        /// <param name="numeroHospedes">numero de hospedes</param>
+        /// <param name="dataEntrada">data de entrada</param>
+        /// <param name="dataSaida">data de saida</param>
+        /// <param name="regime">regime da estadia (mp, pc, ti)</param>
+        /// <param name="valorNoite">valor por noite</param>
+        /// <returns></returns>
         public int CalcularValorDaReserva(int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valorNoite)
         {
             // Calcula a diferença entre as datas de entrada e saída
@@ -98,6 +126,9 @@ namespace Dados
             return valor;
         }
 
+        /// <summary>
+        /// Mostra todas as reservas na consola
+        /// </summary>
         public void MostrarReservas()
         {
             if (reservas.Count == 0)
@@ -112,6 +143,11 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Guarda as reservas em um ficheiro de texto
+        /// </summary>
+        /// <param name="r">variavel associada ao ficheiro de texto</param>
+        /// <returns></returns>
         public bool GuardarReservas(string r)
         {
             try
@@ -132,6 +168,11 @@ namespace Dados
             };
         }
 
+        /// <summary>
+        /// Lê os dados das reservas de um ficheiro de texto
+        /// </summary>
+        /// <param name="r">Variavel associada ao ficheiro de texto</param>
+        /// <returns></returns>
         public bool LerReservas(string r)
         {
             try
@@ -167,19 +208,31 @@ namespace Dados
             }
         }
 
-        public void RemoverReserva(Reserva reserva)
+        /// <summary>
+        /// Remove determinada reserva da lista
+        /// </summary>
+        /// <param name="reserva">lista das reservas</param>
+        /// <returns></returns>
+        public bool RemoverReserva(Reserva reserva)
         {
             if (reservas.Contains(reserva))
             {
                 reservas.Remove(reserva);
+                return true;
                 
             }
             else
             {
                 Console.WriteLine("Reserva não encontrada na lista.");
+                return false;
             }
         }
 
+        /// <summary>
+        /// Obtem determinada reserva pelo seu id
+        /// </summary>
+        /// <param name="id">id da reserva</param>
+        /// <returns></returns>
         public Reserva ObterReservaPorId(int id)
         {
             foreach (Reserva reserva in reservas)
@@ -192,6 +245,11 @@ namespace Dados
             return null;
         }
 
+    /// <summary>
+    /// Mostra dterminada reserva pelo seu id
+    /// </summary>
+    /// <param name="id">id da reserva</param>
+    /// <returns></returns>
         public Reserva MostrarReservaPorId(int id)
         {
             foreach (Reserva reserva in reservas)
@@ -207,6 +265,11 @@ namespace Dados
             return null;
         }
 
+        /// <summary>
+        /// Obtem o id de determinado alojamento
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public int ObterIdAlojamento(int id)
         {
             foreach(Reserva reserva in reservas)
@@ -219,7 +282,13 @@ namespace Dados
             return 0;
         }
 
-
+        /// <summary>
+        /// Altera determinado dado de uma reserva
+        /// </summary>
+        /// <param name="opcao">opcao escolhida</param>
+        /// <param name="id">id da reserva</param>
+        /// <param name="valorNoite">valor por noite</param>
+        /// <returns></returns>
         public bool AlterarDadoReserva(int opcao, int id, int valorNoite)
         {
             foreach (Reserva reserva in reservas)
@@ -255,6 +324,11 @@ namespace Dados
             return false;
         }
 
+        /// <summary>
+        /// Verifica se determinado id ja existe
+        /// </summary>
+        /// <param name="id">id da reserva</param>
+        /// <returns></returns>
         public bool VerificarIdReservaExistente(int id)
         {
             foreach (Reserva reserva in reservas)
@@ -266,7 +340,6 @@ namespace Dados
             }
             return false;
         }
-
 
 
         #endregion

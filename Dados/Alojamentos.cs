@@ -1,4 +1,10 @@
-﻿using _2classe;
+﻿/*
+ * Classe responsavel por desenvolver funções relacionadas com alojamentos
+ * Nuno Oliveira
+ * a25985@alunos.ipca.pt
+ * 19-12-2023
+ * POO-ESI
+ * **/
 using Dados;
 using Objetos;
 using System;
@@ -10,12 +16,15 @@ using System.Threading.Tasks;
 
 namespace Dados
 {
-    public class Alojamentos
+    public class Alojamentos : IAlojamento
     {
         #region ESTADOS
 
         private List<Alojamento> alojamentos;
 
+        /// <summary>
+        /// Construtor padrão que inicializa a lista de alojamentos.
+        /// </summary>
         public Alojamentos()
         {
             alojamentos = new List<Alojamento>(); // Inicializa a lista de alojamento no construtor
@@ -36,12 +45,20 @@ namespace Dados
 
         #region OUTROSMETODOS
 
+        /// <summary>
+        /// Adiciona um novo alojamento à lista.
+        /// </summary>
+        /// <param name="a">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool AdicionarAlojamento(Alojamento a)
         {
             alojamentos.Add(a);
             return true;
         }
 
+        /// <summary>
+        /// Mostra todos os alojamentos na lista, se existirem.
+        /// </summary>
         public void MostrarAlojamentos()
         {
             if (alojamentos.Count == 0)
@@ -56,7 +73,11 @@ namespace Dados
             }
         }
 
-
+        /// <summary>
+        /// Mostra um alojamento com um determinado ID, se existir.
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public Alojamento MostrarAlojamentoPorId(int id)
         {
             foreach (Alojamento alojamento in ALOJAMENTOS)
@@ -72,7 +93,11 @@ namespace Dados
             return null;
         }
 
-
+        /// <summary>
+        /// Verifica se um ID de alojamento existe na lista.
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public bool VerificarIdAlojamentoExistente(int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -85,6 +110,11 @@ namespace Dados
             return false;
         }
 
+        /// <summary>
+        /// Verifica se um ID de alojamento existe na lista e tem disponibilidade.
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public bool VerificarAlojamentoDisponivel(int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -100,8 +130,11 @@ namespace Dados
             return false;
         }
 
-
-
+        /// <summary>
+        /// Guarda os alojamentos num ficheiro de texto.
+        /// </summary>
+        /// <param name="a">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool GuardarAlojamentos(string a)
         {
             try
@@ -121,6 +154,11 @@ namespace Dados
                 return false;
             };
         }
+        /// <summary>
+        /// Lê os dados dos alojamentos de um ficheiro.
+        /// </summary>
+        /// <param name="a">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
 
         public bool LerAlojamentos(string a)
         {
@@ -156,6 +194,10 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Remove determinado alojamento da lista.
+        /// </summary>
+        /// <param name="alojamento">lista dos alojamentos</param>
         public void RemoverAlojamento(Alojamento alojamento)
         {
             if (alojamentos.Contains(alojamento))
@@ -169,6 +211,11 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Obtem determinado alojamento atraves do seu id.
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public Alojamento ObterAlojamentoPorId(int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -181,6 +228,9 @@ namespace Dados
             return null;
         }
 
+        /// <summary>
+        /// Verifica o próximo id disponivel.
+        /// </summary>
         public int ObterProximoIdAlojamentoDisponivel()
         {
             List<int> idsExistentes = new List<int>();
@@ -190,29 +240,33 @@ namespace Dados
                 idsExistentes.Add(alojamento.IdAlojamento);
             }
 
-            // Ordena os IDs existentes em ordem crescente
             idsExistentes.Sort();
 
-            // Verifica o próximo ID disponível
+
             int proximoId = 1; // O menor ID possível é 1
 
             foreach (int idExistente in idsExistentes)
             {
-                // Se o próximo ID for igual ao ID existente, incrementa o próximo ID
+
                 if (proximoId == idExistente)
                 {
                     proximoId++;
                 }
                 else
                 {
-                    // Se encontrar um ID diferente, retorna o próximo ID disponível
+
                     return proximoId;
                 }
             }
 
-            return proximoId; // Se não houver IDs disponíveis entre os existentes, retorna o próximo número
+            return proximoId; 
         }
 
+        /// <summary>
+        /// Obtem o valor de cada noite do alojamento atraves do seu id.
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public int ObterValorNoitePorId(int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -225,7 +279,12 @@ namespace Dados
             return -1;
         }
 
-
+        /// <summary>
+        /// Altera determinado dado do alojamento atraves do seu id e de uma opcao.
+        /// </summary>
+        /// <param name="opcao">opcao da pergunta</param>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
         public bool AlterarDadoAlojamento(int opcao, int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -255,6 +314,11 @@ namespace Dados
             return false;
         }
 
+        /// <summary>
+        /// Altera a disponibilidade do alojamento (0  passa para 1, e vice versa)
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>        
         public bool AlterarDisponibilidadeAlojamento(int id)
         {
             foreach (Alojamento alojamento in alojamentos)
@@ -282,6 +346,9 @@ namespace Dados
             return false; 
         }
 
+        /// <summary>
+        /// Mostra os alojamentos disponiveis (se a sua variavel disponibilidade for 0).
+        /// </summary>
         public List<Alojamento> MostrarAlojamentosDisponiveis()
         {
             List<Alojamento> alojamentosDisponiveis = new List<Alojamento>();

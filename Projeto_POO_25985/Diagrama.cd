@@ -1,34 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="_2classe.Registo">
-    <Position X="8.25" Y="2.75" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="_2classe.Consulta">
-    <Position X="10" Y="1" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="_2classe.Alojamento">
-    <Position X="6.5" Y="0.75" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="_1classe.Reserva">
-    <Position X="2.75" Y="0.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
-  <Class Name="_1classe.Check_in">
-    <Position X="0.75" Y="2.5" Width="1.5" />
-    <TypeIdentifier />
-  </Class>
   <Class Name="Projeto_POO_25985.Io">
-    <Position X="12" Y="3.25" Width="1.5" />
+    <Position X="11.25" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAAAgAAAAABAAAAAAIAAAAQAAAAAAgAAAA=</HashCode>
+      <HashCode>IAARgAACAAAIAAAVCIAAhAAgAAAAAgAAAgQAAAAAZAA=</HashCode>
       <FileName>Io.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="_1classe.Cliente">
-    <Position X="4.5" Y="1.25" Width="1.5" />
+  <Class Name="Dados.Alojamentos">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Dados.Check_Ins">
+    <Position X="7.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Dados.Clientes">
+    <Position X="6" Y="5.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Dados.Reservas">
+    <Position X="7.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Objetos.Alojamento">
+    <Position X="9.5" Y="5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Objetos.Check_In">
+    <Position X="6" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Objetos.Cliente">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Objetos.Reserva">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="Projeto_POO_25985.Menu">
+    <Position X="9.5" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAEAAAAAAAAAIAAAQEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Menu.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Projeto_POO_25985.Program">
+    <Position X="9.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Regras_de_negocio.Regras">
+    <Position X="2.25" Y="1.5" Width="1.5" />
     <TypeIdentifier />
   </Class>
   <Font Name="Segoe UI" Size="9" />

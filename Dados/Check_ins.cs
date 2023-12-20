@@ -1,6 +1,13 @@
-﻿using _1classe;
+﻿/*
+ * Classe responsavel por desenvolver funções relacionadas com Check_Ins
+ * Nuno Oliveira
+ * a25985@alunos.ipca.pt
+ * 19-12-2023
+ * POO-ESI
+ * **/
 using Objetos;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -10,12 +17,15 @@ using System.Threading.Tasks;
 
 namespace Dados
 {
-    public class Check_Ins
+    public class Check_Ins : ICheck_in
     {
         #region ESTADOS
 
         private List<Check_In> check_Ins;
 
+        /// <summary>
+        /// Construtor padrão que inicializa a lista de Check_Ins.
+        /// </summary>
         public Check_Ins()
         {
             check_Ins = new List<Check_In>();
@@ -24,6 +34,10 @@ namespace Dados
         #endregion
 
         #region PROPRIEDADES
+
+        /// <summary>
+        /// Obtem o próximo id disponivel.
+        /// </summary>
         public int ObterProximoIdCheck_InDisponivel()
         {
             List<int> idsExistentes = new List<int>();
@@ -33,60 +47,58 @@ namespace Dados
                 idsExistentes.Add(check_In.IdCheck_In);
             }
 
-            // Ordena os IDs existentes em ordem crescente
             idsExistentes.Sort();
 
-            // Verifica o próximo ID disponível
             int proximoId = 1; // O menor ID possível é 1
 
             foreach (int idExistente in idsExistentes)
             {
-                // Se o próximo ID for igual ao ID existente, incrementa o próximo ID
                 if (proximoId == idExistente)
                 {
                     proximoId++;
                 }
                 else
                 {
-                    // Se encontrar um ID diferente, retorna o próximo ID disponível
                     return proximoId;
                 }
             }
 
-            return proximoId; // Se não houver IDs disponíveis entre os existentes, retorna o próximo número
+            return proximoId; 
         }
 
+        /// <summary>
+        /// Efetua o Check_In
+        /// </summary>
+        /// <param name="c">Lista dos check ins</param>
+        /// <returns></returns>
         public bool EfetuarCheck_In(Check_In c)
         {
             check_Ins.Add(c);
             return true;
         }
 
-        public void RemoverCheck_In(Check_In c)
+        /// Remove o Check_In
+        /// </summary>
+        /// <param name="c">Lista dos check ins</param>
+        /// <returns></returns>
+        public bool RemoverCheck_In(Check_In c)
         {
             if (check_Ins.Contains(c))
             {
                 check_Ins.Remove(c);
                 Console.WriteLine("Check_In removido com sucesso!");
+                return true;
             }
             else
             {
                 Console.WriteLine("Check_In não encontrada na lista.");
+                return false;
             }
         }
 
-        public Check_In ObterCheck_InPorId(int id)
-        {
-            foreach (Check_In check_In in check_Ins)
-            {
-                if (check_In.IdCheck_In == id)
-                {
-                    return check_In;
-                }
-            }
-            return null;
-        }
-
+        /// <summary>
+        /// Mostra todos os check_ins na consola
+        /// </summary>
         public void MostrarCheck_Ins()
         {
             if (check_Ins.Count == 0)
@@ -101,6 +113,28 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Obtem determinado check in pelo seu id
+        /// </summary>
+        /// <param name="id">id do checkin</param>
+        /// <returns></returns>
+        public Check_In ObterCheck_InPorId(int id)
+        {
+            foreach (Check_In check_In in check_Ins)
+            {
+                if (check_In.IdCheck_In == id)
+                {
+                    return check_In;
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Guarda os dados do check in em um ficheiro de texto
+        /// </summary>
+        /// <param name="c">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool GuardarCheck_Ins(string c)
         {
             try
@@ -121,6 +155,11 @@ namespace Dados
             };
         }
 
+        /// <summary>
+        /// LÊ os dados do check in de um ficheiro de texto
+        /// </summary>
+        /// <param name="c">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool LerCheck_Ins(string c)
         {
             try
@@ -155,6 +194,9 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Mostra os check ins que ainda estão pendentes (que não fizeram check out)
+        /// </summary>
         public void MostrarCheck_InsPendentes()
         {
             int aux=0;
@@ -170,10 +212,16 @@ namespace Dados
             if(aux==0)
             { 
                 Console.WriteLine("Não existe nenhum Check_In pendente."); 
+
             }
             
         }
 
+        /// <summary>
+        /// Efetua check out
+        /// </summary>
+        /// <param name="idCheck_In">id do check in</param>
+        /// <returns></returns>
         public bool EfetuarCheck_Out(int idCheck_In)
         {
             foreach (Check_In check_In in check_Ins)
@@ -190,7 +238,7 @@ namespace Dados
         }
 
 
+        #endregion
     }
 
-    #endregion
 }

@@ -1,5 +1,5 @@
 ﻿/*
- * Classe responsavel por operações de entrada/saída (I/O)
+ * Classe para descrever um Check_In
  * Nuno Oliveira
  * a25985@alunos.ipca.pt
  * 15-11-2023
@@ -27,9 +27,9 @@ namespace Objetos
         #region Estado
 
         private int idCheck_In;           // ID do check-in
-        private int idCliente;
-        private int idReserva;
-        private int idAlojamento;
+        private int idCliente;            //id do cliente associado
+        private int idReserva;            //id da reserva associada
+        private int idAlojamento;         //id do alojamento associado
         private DateTime dataCheck_In;    // Data de entrada
         private DateTime dataCheck_Out;   // Data de saída
         private int estadia;              //0 -> ainda nao terminou   1-> ja terminou
@@ -92,6 +92,9 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do cliente.
+        /// </summary>
         public int IdCliente
         {
             set
@@ -105,6 +108,9 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID da reserva.
+        /// </summary>
         public int IdReserva
         {
             set
@@ -118,6 +124,9 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do alojamento.
+        /// </summary>
         public int IdAlojamento
         {
             set
@@ -160,6 +169,9 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar o valor associado à estadia.
+        /// </summary>
         public int Estadia
         {
             set
@@ -229,6 +241,11 @@ namespace Objetos
                 }
             }
             return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
         #endregion
 

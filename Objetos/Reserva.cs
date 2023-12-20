@@ -1,5 +1,5 @@
 ﻿/*
- * Classe responsavel por operações de entrada/saída (I/O)
+ * Classe para descrever uma Reserva
  * Nuno Oliveira
  * a25985@alunos.ipca.pt
  * 15-11-2023
@@ -28,7 +28,7 @@ namespace Objetos
         private DateTime dataSaida;      // Data de saída da reserva
         private string regime;           // Regime da reserva (ex: meia-pensão, pensão completa, etc.)
         private int valor;               // Valor da estadia
-        private int idAlojamentoReserva;
+        private int idAlojamentoReserva; // id do alojamento associado à reserva
         #endregion
 
         #region Comportamentos
@@ -40,10 +40,10 @@ namespace Objetos
         /// </summary>
         public Reserva()
         {
-            idReserva = 0;
-            numeroHospedes = 0;
-            dataEntrada = DateTime.Now;
-            dataSaida = DateTime.Now;
+            idReserva = 0;                  
+            numeroHospedes = 0;             
+            dataEntrada = DateTime.Now;    
+            dataSaida = DateTime.Now;   
             regime = "";
             valor = 0;
             idAlojamentoReserva = 0;
@@ -243,6 +243,10 @@ namespace Objetos
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #endregion

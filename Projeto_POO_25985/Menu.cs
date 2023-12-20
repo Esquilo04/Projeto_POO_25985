@@ -87,7 +87,7 @@ namespace Projeto_POO_25985
                             break;
 
                         case 4:
-                        regras.MostrarDadosClientePorId();
+                            regras.MostrarDadosClientePorId();
                             break;
                         case 5:
                         regras.AlterarDadosClientes();

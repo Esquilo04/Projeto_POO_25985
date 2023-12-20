@@ -12,13 +12,18 @@ namespace Regras_de_negocio
 {
     public class Regras
     {
-
+        /// <summary>
+        /// Instâncias dos principais objetos do sistema
+        /// </summary>
         private Clientes clientes;
         private Alojamentos alojamentos;
         private Reservas reservas;
         private Check_Ins check_Ins;
         private Io io;
 
+        /// <summary>
+        /// Construtor padrão que inicializa os objetos principais do sistema.
+        /// </summary>
         public Regras()
         {
             clientes = new Clientes();
@@ -28,15 +33,24 @@ namespace Regras_de_negocio
             io = new Io();
         }
 
-
+        /// <summary>
+        /// Menu Gestor
+        /// </summary>
+        /// <returns></returns>
         public int MenuGestor()
         {
             int opcaogestor;
             io.MenuGestor(out opcaogestor);
             return opcaogestor;
         }
+
+
         #region Cliente
 
+        /// <summary>
+        /// Adiciona um cliente à lista
+        /// </summary>
+        /// <returns></returns>
         public bool AdicionarCliente()
         {
             int nif, tel;
@@ -65,12 +79,10 @@ namespace Regras_de_negocio
             return false;
         }
 
-        public void MostrarClientes()
-        {
-            Console.WriteLine("\nDados dos clientes:");
-            clientes.MostrarClientes();
-        }
-
+        /// <summary>
+        /// Mostra os dados de um cliente pelo seu id
+        /// </summary>
+        /// <returns></returns>
         public Cliente MostrarDadosClientePorId()
         {
             int id;
@@ -86,16 +98,37 @@ namespace Regras_de_negocio
             return clienteEncontrado;
         }
 
+        /// <summary>
+        /// Mostra todos os clientes na consola
+        /// </summary>
+        public void MostrarClientes()
+        {
+            Console.WriteLine("\nDados dos clientes:");
+            clientes.MostrarClientes();
+        }
+
+        /// <summary>
+        /// Guarda os dados dos clientes em um ficheiro de texto
+        /// </summary>
+        /// <param name="d">Variavel para o nome do ficheiro</param>
         public void GuardarClientes(string d)
         {
             clientes.GuardarClientes(d);
         }
 
+        /// <summary>
+        /// LÊ os dados dos clientes de um ficheiro de texto
+        /// </summary>
+        /// <param name="d">Variavel para o nome do ficheiro</param>
         public void LerClientes(string d)
         {
             clientes.LerClientes(d);
         }
 
+        /// <summary>
+        /// Apaga determinado cliente pelo seu id
+        /// </summary>
+        /// <returns></returns>
         public bool ApagarClientePorId()
         {
             int id;
@@ -115,6 +148,10 @@ namespace Regras_de_negocio
             }
         }
 
+        /// <summary>
+        /// Menu dos clientes
+        /// </summary>
+        /// <returns></returns>
         public int MenuClientes()
         {
             int opcao;
@@ -122,6 +159,9 @@ namespace Regras_de_negocio
             return opcao;
         }
 
+        /// <summary>
+        /// Altera determinado dado de um cliente
+        /// </summary>
         public void AlterarDadosClientes()
         {
             int id, dado;
@@ -135,6 +175,10 @@ namespace Regras_de_negocio
 
         #region Alojamento
 
+        /// <summary>
+        /// Adiciona um alojamento à lista
+        /// </summary>
+        /// <returns></returns>
         public bool AdicionarAlojamento()
         {
             int numeroQuartos, classificacao, disponibilidade, valorNoite;
@@ -163,12 +207,49 @@ namespace Regras_de_negocio
             return false;
         }
 
-        public void MostrarAlojamentos()
+        /// <summary>
+        /// Guarda os dados dos alojamentos em um ficheiro de texto
+        /// </summary>
+        /// <param name="a">Variavel para o nome do ficheiro</param>
+        public void GuardarAlojamentos(string a)
         {
-            Console.WriteLine("\nDados dos alojamentos:");
-            alojamentos.MostrarAlojamentos();
+            alojamentos.GuardarAlojamentos(a);
         }
 
+        /// <summary>
+        /// LÊ os dados de um ficheiro de texto
+        /// </summary>
+        /// <param name="a">Variavel para o nome do ficheiro</param>
+        public void LerAlojamentos(string a)
+        {
+            alojamentos.LerAlojamentos(a);
+        }
+
+        /// <summary>
+        /// Mostra todos os alojamentos disponiveis
+        /// </summary>
+        public void MostrarAlojamentosDisponiveis()
+        {
+            List<Alojamento> alojamentosDisponiveis = alojamentos.MostrarAlojamentosDisponiveis();
+
+            if (alojamentosDisponiveis.Count > 0)
+            {
+                Console.WriteLine("Alojamentos disponíveis:");
+                foreach (Alojamento alojamento in alojamentosDisponiveis)
+                {
+                    Console.WriteLine(alojamento.ToString());
+                }
+            }
+            else
+            {
+                Console.WriteLine("Não existe nenhum alojamento disponível.");
+            }
+        }
+
+        /// <summary>
+        /// Mostra os dados de determinado alojamento pelo seu id
+        /// </summary>
+        /// <returns></returns>
         public Alojamento MostrarDadosAlojamentoPorId()
         {
             int id;
@@ -184,16 +265,19 @@ namespace Regras_de_negocio
             return alojamentoEncontrado;
         }
 
-        public void GuardarAlojamentos(string a)
+        /// <summary>
+        /// Mostra todos os alojamentos
+        /// </summary>
+        public void MostrarAlojamentos()
         {
-            alojamentos.GuardarAlojamentos(a);
+            Console.WriteLine("\nDados dos alojamentos:");
+            alojamentos.MostrarAlojamentos();
         }
 
-        public void LerAlojamentos(string a)
-        {
-            alojamentos.LerAlojamentos(a);
-        }
-
+        /// <summary>
+        /// Apaga determinado alojamento
+        /// </summary>
+        /// <returns></returns>
         public bool ApagarAlojamentoPorId()
         {
             int id;
@@ -213,6 +297,10 @@ namespace Regras_de_negocio
             }
         }
 
+        /// <summary>
+        /// Menu dos alojamentos
+        /// </summary>
+        /// <returns></returns>
         public int MenuAlojamentos()
         {
             int opcao2;
@@ -220,6 +308,9 @@ namespace Regras_de_negocio
             return opcao2;
         }
 
+        /// <summary>
+        /// Altera determinado dado de um alojamento
+        /// </summary>
         public void AlterarDadosAlojamentos()
         {
             int id, dado;
@@ -228,6 +319,9 @@ namespace Regras_de_negocio
             alojamentos.AlterarDadoAlojamento(dado, id);
         }
 
+        /// <summary>
+        /// Altera a disponibilidade de um alojamento
+        /// </summary>
         public void AlterarDisponibilidadeAlojamento()
         {
             int id;
@@ -235,30 +329,15 @@ namespace Regras_de_negocio
             alojamentos.AlterarDisponibilidadeAlojamento(id);
         }
 
-        public void MostrarAlojamentosDisponiveis()
-        {
-            List<Alojamento> alojamentosDisponiveis = alojamentos.MostrarAlojamentosDisponiveis();
-
-            if (alojamentosDisponiveis.Count > 0)
-            {
-                Console.WriteLine("Alojamentos disponíveis:");
-                foreach (Alojamento alojamento in alojamentosDisponiveis)
-                {
-                    Console.WriteLine(alojamento.ToString());
-                }
-            }
-            else
-            {
-                Console.WriteLine("Não existe nenhum alojamento disponível.");
-            }
-        }
-
         #endregion
 
 
         #region Reserva
 
-
+        /// <summary>
+        /// Adicona uma reserva à lista
+        /// </summary>
+        /// <returns></returns>
         public bool AdicionarReserva()
         {
             int idReserva, numeroHospedes, valor, idAlojamentoReserva, valorNoite;
@@ -286,12 +365,38 @@ namespace Regras_de_negocio
             return false;
         }
 
+        /// <summary>
+        /// Mostra os dados de determinada reserva atraves do seu id
+        /// </summary>
+        /// <returns></returns>
+        public Reserva MostrarDadosReservaPorId()
+        {
+            int id;
+            io.ObterIdAlojamento(out id);
+
+            Reserva reservaEncontrado = reservas.MostrarReservaPorId(id);
+
+            if (reservaEncontrado == null)
+            {
+                Console.WriteLine("Reserva não encontrado.");
+            }
+
+            return reservaEncontrado;
+        }
+
+        /// <summary>
+        /// Mostra todas as reservas na consola
+        /// </summary>
         public void MostrarReservas()
         {
             Console.WriteLine("\nDados das reservas:");
             reservas.MostrarReservas();
         }
 
+        /// <summary>
+        /// Menu das reservas
+        /// </summary>
+        /// <returns></returns>
         public int MenuReservas()
         {
             int opcao3;
@@ -299,16 +404,28 @@ namespace Regras_de_negocio
             return opcao3;
         }
 
+        /// <summary>
+        /// Guarda os dados das reservas em um ficheiro de texto
+        /// </summary>
+        /// <param name="r">Variavel para o nome do ficheiro</param>
         public void GuardarReservas(string r)
         {
             reservas.GuardarReservas(r);
         }
 
+        /// <summary>
+        /// Lê os dados das reservas de um ficheiro de texto
+        /// </summary>
+        /// <param name="r">Variavel para o nome do ficheiro</param>
         public void LerReservas(string r)
         {
             reservas.LerReservas(r);
         }
 
+        /// <summary>
+        /// Apaga determinada reserva
+        /// </summary>
+        /// <returns></returns>
         public bool ApagarReservaPorId()
         {
             int id;
@@ -328,6 +445,11 @@ namespace Regras_de_negocio
             }
         }
 
+        /// <summary>
+        /// Apaga reserva pelo id sem o perguntar ao utilizador
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool ApagarReservaPorId2(int id)
         {
             Reserva reservaEncontrada = reservas.ObterReservaPorId(id);
@@ -342,21 +464,10 @@ namespace Regras_de_negocio
                 return false;
             }
         }
-        public Reserva MostrarDadosReservaPorId()
-        {
-            int id;
-            io.ObterIdAlojamento(out id);
 
-            Reserva reservaEncontrado = reservas.MostrarReservaPorId(id);
-
-            if (reservaEncontrado == null)
-            {
-                Console.WriteLine("Reserva não encontrado.");
-            }
-
-            return reservaEncontrado;
-        }
-
+        /// <summary>
+        /// Altera determinado dado da reserva
+        /// </summary>
         public void AlterarDadosReservas()
         {
             int idReserva, dado, idAlojamento, valorNoite;
@@ -372,7 +483,10 @@ namespace Regras_de_negocio
 
         #region Check_In
 
-
+        /// <summary>
+        /// Efetua check in
+        /// </summary>
+        /// <returns></returns>
         public bool EfetuarCheck_In()
         {
             int idCheck_In, idCliente, idReserva, idAlojamento;
@@ -414,27 +528,45 @@ namespace Regras_de_negocio
             return false;
         }
 
+        /// <summary>
+        /// Mostra todos os check ins na consola
+        /// </summary>
         public void MostrarCheck_Ins()
         {
             Console.WriteLine("\nDados dos Check_Ins:");
             check_Ins.MostrarCheck_Ins();
         }
 
+        /// <summary>
+        /// Mostra todos os check ins na consola pendentes
+        /// </summary>
         public void MostrarCheck_InsPendentes()
         {
             check_Ins.MostrarCheck_InsPendentes();
         }
 
+        /// <summary>
+        /// Guarda todos os dados dos chekc ins em um ficheiro de texto
+        /// </summary>
+        /// <param name="c">Variavel para o nome do ficheiro</param>
         public void GuardarCheck_Ins(string c)
         {
             check_Ins.GuardarCheck_Ins(c);
         }
 
+        /// <summary>
+        /// Lê os dados de um ficheiro de texto
+        /// </summary>
+        /// <param name="c">Variavel para o nome do ficheiro</param>
         public void LerCheck_Ins(string c)
         {
             check_Ins.LerCheck_Ins(c);
         }
 
+        /// <summary>
+        /// Menu dos check ins
+        /// </summary>
+        /// <returns></returns>
         public int MenuCheck_Ins()
         {
             int opcao4;
@@ -442,6 +574,10 @@ namespace Regras_de_negocio
             return opcao4;
         }
 
+        /// <summary>
+        /// Apaga os dados de determinado check in pelo seu id
+        /// </summary>
+        /// <returns></returns>
         public bool ApagarCheck_InPorId()
         {
             int id;
@@ -461,6 +597,9 @@ namespace Regras_de_negocio
             }
         }
 
+        /// <summary>
+        /// Efetua o check out
+        /// </summary>
         public void EfetuarCheck_Out()
         {
             int id;

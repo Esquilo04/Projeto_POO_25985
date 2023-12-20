@@ -49,15 +49,11 @@
     <Compile Include="Alojamentos.cs" />
     <Compile Include="Check_Ins.cs" />
     <Compile Include="Clientes.cs" />
-    <Compile Include="Consultas.cs" />
-    <Compile Include="Interfaces\IConsulta.cs" />
     <Compile Include="Interfaces\IAlojamento.cs" />
-    <Compile Include="Interfaces\IClientes.cs" />
+    <Compile Include="Interfaces\ICliente.cs" />
     <Compile Include="Interfaces\ICheck_in.cs" />
-    <Compile Include="Interfaces\IRegisto.cs" />
     <Compile Include="Interfaces\IReserva.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registos.cs" />
     <Compile Include="Reservas.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

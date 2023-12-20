@@ -1,5 +1,5 @@
 ﻿/*
- * Classe responsavel por operações de entrada/saída (I/O)
+ * Classe para descrever um Alojamento
  * Nuno Oliveira
  * a25985@alunos.ipca.pt
  * 15-11-2023
@@ -30,7 +30,7 @@ namespace Objetos
         private int numeroQuartos;              // Número de quartos no alojamento
         private int classificacaoAlojamento;    // Classificação do alojamento (1 a 5)
         private int disponibilidade;            // 0 ou 1. 0->disponivel    1->ocupado
-        private int valorNoite;
+        private int valorNoite;                 //Valor por noite do alojamento
         #endregion
 
         #region Comportamentos
@@ -58,6 +58,7 @@ namespace Objetos
         /// <param name="numeroQuartos">Número de quartos</param>
         /// <param name="classificacaoAlojamento">Classificação do alojamento</param>
         /// <param name="disponibilidade">Disponibilidade do alojamento</param>
+        
         public Alojamento(int idAlojamento, string moradaAlojamento, int numeroQuartos, int classificacaoAlojamento, int disponibilidade, int valorNoite)
         {
             this.idAlojamento = idAlojamento;
@@ -135,6 +136,9 @@ namespace Objetos
             }
         }
 
+        /// <summary>
+        /// Propriedade para acessar e modificar a dispnibilidade do alojamento.
+        /// </summary>
         public int Disponibilidade
         {
             set
@@ -220,6 +224,10 @@ namespace Objetos
             return false;
         }
 
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
         #endregion
 
         #endregion

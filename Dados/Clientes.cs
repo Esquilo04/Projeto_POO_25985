@@ -1,4 +1,11 @@
-﻿using Objetos;
+﻿/*
+ * Classe responsavel por desenvolver funções relacionadas com Clientes
+ * Nuno Oliveira
+ * a25985@alunos.ipca.pt
+ * 19-12-2023
+ * POO-ESI
+ * **/
+using Objetos;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,15 +19,18 @@ using System.Threading.Tasks;
 
 namespace Dados
 {
-    public class Clientes
+    public class Clientes : ICliente
     {
         #region ESTADOS
 
         private List<Cliente> clientes;
 
+        /// <summary>
+        /// Inicializa a lista de clientes no construtor
+        /// </summary>
         public Clientes()
         {
-            clientes = new List<Cliente>(); // Inicializa a lista de clientes no construtor
+            clientes = new List<Cliente>();
         }
 
         #endregion
@@ -38,13 +48,20 @@ namespace Dados
 
         #region OUTROSMETODOS
 
+        /// <summary>
+        /// Adiciona um cliente à lista
+        /// </summary>
+        /// <param name="c">lista dos clientes</param>
+        /// <returns></returns>
         public bool AdicionarCliente(Cliente c)
         {
             clientes.Add(c);
             return true;
         }
 
-
+        /// <summary>
+        /// Mostra todos os clientes na consola
+        /// </summary>
         public void MostrarClientes()
         {
             if (clientes.Count == 0)
@@ -59,6 +76,11 @@ namespace Dados
             }
         }
 
+        /// <summary>
+        /// Mostra determinado cliente atraves do seu id
+        /// </summary>
+        /// <param name="id">id do cliente</param>
+        /// <returns></returns>
         public Cliente MostrarClientePorId(int id)
         {
             foreach (Cliente cliente in CLIENTES)
@@ -67,13 +89,18 @@ namespace Dados
                 {
                     Console.WriteLine("Dados do cliente:");
                     Console.WriteLine(cliente.ToString());
-                    return cliente; // Retorna o cliente se o ID for encontrado
+                    return cliente; 
                 }
             }
 
-            return null; // Retorna null se o cliente com o ID especificado não for encontrado
+            return null; 
         }
 
+        /// <summary>
+        /// Verifica se determinado id ja existe
+        /// </summary>
+        /// <param name="id">id do cliente</param>
+        /// <returns></returns>
         public bool VerificarIdExistente(int id)
         {
             foreach (Cliente cliente in clientes)
@@ -86,7 +113,11 @@ namespace Dados
             return false; // Retorna falso se o ID não for encontrado na lista de clientes
         }
 
-
+        /// <summary>
+        /// Guarda os dados dos clientes em um ficheiro e texto
+        /// </summary>
+        /// <param name="d">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool GuardarClientes(string d)
         {
             try
@@ -107,7 +138,11 @@ namespace Dados
             };
         }
 
-
+        /// <summary>
+        /// LÊ os dados dos clientes de um ficheiro de texto
+        /// </summary>
+        /// <param name="d">Variavel para o nome do ficheiro</param>
+        /// <returns></returns>
         public bool LerClientes(string d)
         {
             try
@@ -140,19 +175,31 @@ namespace Dados
             }
         }
 
-        public void RemoverCliente(Cliente cliente)
+        /// <summary>
+        /// Remove determinado cliente da lista
+        /// </summary>
+        /// <param name="cliente">lista dos clientes</param>
+        /// <returns></returns>
+        public bool RemoverCliente(Cliente cliente)
         {
             if (clientes.Contains(cliente))
             {
                 clientes.Remove(cliente);
                 Console.WriteLine("Cliente removido com sucesso!");
+                return true;
             }
             else
             {
                 Console.WriteLine("Cliente não encontrado na lista.");
+                return false;
             }
         }
 
+        /// <summary>
+        /// Obtem determinado cliente atraves do seu id
+        /// </summary>
+        /// <param name="id">id do cliente</param>
+        /// <returns></returns>
         public Cliente ObterClientePorId(int id)
         {
             foreach (Cliente cliente in clientes)
@@ -165,6 +212,10 @@ namespace Dados
             return null; // Retorna null se não encontrar nenhum cliente com o ID especificado
         }
 
+        /// <summary>
+        /// Obtem o proximo id disponivel
+        /// </summary>
+        /// <returns></returns>
         public int ObterProximoIdDisponivel()
         {
             List<int> idsExistentes = new List<int>();
@@ -198,7 +249,12 @@ namespace Dados
             return proximoId; // Se não houver IDs disponíveis entre os existentes, retorna o próximo número
         }
 
-
+        /// <summary>
+        /// Altera determinado dado de um cliente
+        /// </summary>
+        /// <param name="opcao">opcao que escolheu</param>
+        /// <param name="id">id do cliente</param>
+        /// <returns></returns>
         public bool AlterarDadoCliente(int opcao, int id)
         {
             foreach(Cliente cliente in clientes)

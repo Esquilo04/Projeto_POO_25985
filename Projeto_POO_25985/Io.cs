@@ -25,18 +25,25 @@ namespace Projeto_POO_25985
     /// </summary>
     public class Io
     {
+        private Clientes clientes;
+        private Alojamentos alojamentos;
+        private Reservas reservas;
+        private Check_Ins check_Ins;
 
-        #region Cliente
+        public Io()
+        {
+            clientes = new Clientes();
+            alojamentos = new Alojamentos();
+            reservas = new Reservas();
+            check_Ins = new Check_Ins();
+        }
+
         /// <summary>
         /// Region utilizada para operações de I/O relacionadas com Clientes.
         /// </summary>
+        #region Cliente
 
-
-
-        /// <summary>
-        /// Adiciona um novo cliente.
-        /// </summary>
-        /// <param name="cliente">O cliente a ser adicionado</param>
+        
         public void AdicionarCliente(out string nome, out int nif, out string morada, out int tel)
         {
             Console.WriteLine("Qual o nome do cliente?");
@@ -52,6 +59,10 @@ namespace Projeto_POO_25985
             tel = int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Obtem o id do cliente
+        /// </summary>
+        /// <param name="id">id do cliente</param>
         public void ObterIdCliente(out int id)
         {
             Console.WriteLine("Qual o ID do cliente?");
@@ -62,7 +73,11 @@ namespace Projeto_POO_25985
             
         }
 
-
+        /// <summary>
+        /// Altera determinado dado de um cliente
+        /// </summary>
+        /// <param name="dado">opcao escolhida</param>
+        /// <returns></returns>
         public int AlterarDadoCliente(out int dado)
         {
             int aux = 0;
@@ -90,6 +105,10 @@ namespace Projeto_POO_25985
             return aux; // Se necessário, você pode retornar o valor escolhido
         }
 
+        /// <summary>
+        /// Menu dos clientes
+        /// </summary>
+        /// <param name="opcao">opcao escolhida</param>
         public void MenuClientes(out int opcao)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -106,45 +125,13 @@ namespace Projeto_POO_25985
 
 
 
-        #region Consulta
-        /// <summary>
-        /// Region utilizada para operações de I/O relacionadas com Consultas de Dados de Clientes e Alojamentos.
-        /// </summary>
-
-
-
-        /// <summary>
-        /// Consulta os dados de um cliente.
-        /// </summary>
-        /// <param name="cliente">O cliente cujos dados são consultados</param>
-        void consultarDadosCliente(Cliente cliente) { }
-
-        #endregion
-
-
-
-        #region Registo
-        /// <summary>
-        /// Região utilizada para operações de I/O relacionadas com Registo de Alojamentos e Clientes.
-        /// </summary>
-
-
-
-        /// <summary>
-        /// Regista um novo alojamento.
-        /// </summary>
-        void registarAlojamento(Alojamento alojamento) { }
-
-        #endregion
-
-
-
         #region Alojamento
         /// <summary>
         /// Região utilizada para operações de I/O relacionadas com Alojamentos.
         /// </summary>
 
 
+        
         public void AdicionarAlojamento(out string morada, out int numeroQuartos, out int classificacao, out int disponibilidade, out int valorNoite)
         {
             Console.WriteLine("Qual a morada do alojamento?");
@@ -162,6 +149,10 @@ namespace Projeto_POO_25985
             valorNoite = int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Obtem o id do alojamento
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
         public void ObterIdAlojamento(out int id)
         {
             Console.WriteLine("Qual o ID do alojamento?");
@@ -171,6 +162,10 @@ namespace Projeto_POO_25985
             }
         }
 
+        /// <summary>
+        /// Menu com os dados dos alojamentos
+        /// </summary>
+        /// <param name="opcao2">opcao escolhida</param>
         public void MenuAlojamentos(out int opcao2)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -185,6 +180,11 @@ namespace Projeto_POO_25985
             opcao2 = int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Altera dterminado de um alojamento
+        /// </summary>
+        /// <param name="dado">opcao escolhida</param>
+        /// <returns></returns>
         public int AlterarDadoAlojamento(out int dado)
         {
             int aux = 0;
@@ -211,7 +211,10 @@ namespace Projeto_POO_25985
             return aux; // Se necessário, você pode retornar o valor escolhido
         }
 
-
+        /// <summary>
+        /// Menu dos gestores com opcao para os outros menus
+        /// </summary>
+        /// <param name="opcaogestor">opcao escolhida</param>
         public void MenuGestor(out int opcaogestor)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -229,6 +232,11 @@ namespace Projeto_POO_25985
 
         #region Reserva
 
+
+        /// <summary>
+        /// Converte o valor int para string
+        /// </summary>
+        /// <returns></returns>
         public string ConverterRegime()
         {
             bool entradaValida = false;
@@ -265,6 +273,13 @@ namespace Projeto_POO_25985
             return regimeConvertido;
         }
 
+        /// <summary>
+        /// Adiciona os dados de uma reserva
+        /// </summary>
+        /// <param name="numeroHospedes">numero de hospedes</param>
+        /// <param name="dataEntrada">data de entrada</param>
+        /// <param name="dataSaida">data de saida</param>
+        /// <param name="regime">data de saida</param>
         public void AdicionarReserva(out int numeroHospedes, out DateTime dataEntrada, out DateTime dataSaida, out string regime)
         {
 
@@ -281,6 +296,10 @@ namespace Projeto_POO_25985
 
         }
 
+        /// <summary>
+        /// Menu das reservas
+        /// </summary>
+        /// <param name="opcao3">opcao escolhida</param>
         public void MenuReservas(out int opcao3)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -293,6 +312,10 @@ namespace Projeto_POO_25985
             opcao3 = int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Obtem o id de uma reserva
+        /// </summary>
+        /// <param name="id">id da reserva</param>
         public void ObterIdReserva(out int id)
         {
             Console.WriteLine("Qual o ID da reserva?");
@@ -302,6 +325,11 @@ namespace Projeto_POO_25985
             }
         }
 
+        /// <summary>
+        /// Altera os dados de uma reserva
+        /// </summary>
+        /// <param name="dado">opcao escolhida</param>
+        /// <returns></returns>
         public int AlterarDadoReserva(out int dado)
         {
             int aux = 0;
@@ -334,6 +362,10 @@ namespace Projeto_POO_25985
 
         #region Check_In
 
+        /// <summary>
+        /// Menu do Check_in
+        /// </summary>
+        /// <param name="opcao4">opcao escolhida</param>
         public void MenuCheck_Ins(out int opcao4)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -346,6 +378,10 @@ namespace Projeto_POO_25985
             opcao4 = int.Parse(Console.ReadLine());
         }
 
+        /// <summary>
+        /// Obtem o id do Check_In
+        /// </summary>
+        /// <param name="id">id do check in</param>
         public void ObterIdCheck_In(out int id)
         {
             Console.WriteLine("Qual o ID do Check_In?");

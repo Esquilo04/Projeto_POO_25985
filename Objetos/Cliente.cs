@@ -1,11 +1,10 @@
 ﻿/*
- * Classe responsavel por operações de entrada/saída (I/O)
+ * Classe para descrever um Cliente
  * Nuno Oliveira
  * a25985@alunos.ipca.pt
  * 15-11-2023
  * POO-ESI
  * **/
-
 
 using System;
 using System.Collections.Generic;
@@ -212,16 +211,7 @@ namespace Objetos
 
         public override int GetHashCode()
         {
-            unchecked
-            {
-                int hash = 17;
-                hash = hash * 23 + idCliente.GetHashCode();
-                hash = hash * 23 + nomeCliente.GetHashCode();
-                hash = hash * 23 + nifCliente.GetHashCode();
-                hash = hash * 23 + moradaCliente.GetHashCode();
-                hash = hash * 23 + telemovelCliente.GetHashCode();
-                return hash;
-            }
+            return base.GetHashCode();
         }
         #endregion
         #endregion

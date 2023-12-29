@@ -335,6 +335,45 @@ namespace Regras_de_negocio
         #region Reserva
 
         /// <summary>
+        /// Exibe os dados de todos os alojamentos disponiveis para as datas introduzidas
+        /// </summary>
+        /// <param name="reservas">lista das reservas</param>
+        /// <param name="alojamentos">lista dos alojamentos</param>
+        /// <param name="dataEntrada">data de entrada</param>
+        /// <param name="dataSaida">data de saida</param>
+        public bool MostrarAlojamentosDisponiveis(Reservas reservas, Alojamentos alojamentos, DateTime dataEntrada, DateTime dataSaida)
+        {
+            List<int> alojamentosOcupados = reservas.ObterAlojamentosOcupados(dataEntrada, dataSaida);
+
+            if (alojamentosOcupados.Count == alojamentos.ObterTodosIdsAlojamentos().Count)
+            {
+                Console.WriteLine("Não existem alojamentos disponíveis para as datas selecionadas.");
+                return false;
+            }
+
+            Console.WriteLine("Alojamentos disponíveis para as datas fornecidas:");
+
+            bool alojamentosEncontrados = false;
+
+            foreach (int idAlojamento in alojamentos.ObterTodosIdsAlojamentos())
+            {
+                if (!alojamentosOcupados.Contains(idAlojamento))
+                {
+                    alojamentos.MostrarAlojamentoPorId(idAlojamento);
+                    alojamentosEncontrados = true;
+                }
+            }
+
+            if (!alojamentosEncontrados)
+            {
+                Console.WriteLine("Não foram encontrados alojamentos disponíveis para as datas fornecidas.");
+                return false;
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Adicona uma reserva à lista
         /// </summary>
         /// <returns></returns>
@@ -344,8 +383,18 @@ namespace Regras_de_negocio
             DateTime dataEntrada, dataSaida;
             string regime;
             io.AdicionarReserva(out numeroHospedes, out dataEntrada, out dataSaida, out regime);
-            MostrarAlojamentosDisponiveis();
+            if(!MostrarAlojamentosDisponiveis(reservas, alojamentos, dataEntrada, dataSaida))
+            {
+                return false;
+            }
+
+            Console.WriteLine("Qual alojamento gostaria de reservar?");
             idAlojamentoReserva = int.Parse(Console.ReadLine());
+            if(!alojamentos.VerificarIdAlojamentoExistente(idAlojamentoReserva))
+            {
+                Console.WriteLine("Alojamento não existente.");
+                return false;
+            }
             alojamentos.VerificarAlojamentoDisponivel(idAlojamentoReserva);
             valorNoite = alojamentos.ObterValorNoitePorId(idAlojamentoReserva);
             idReserva = reservas.ObterProximoIdReservaDisponivel();

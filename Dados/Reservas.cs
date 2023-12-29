@@ -341,6 +341,26 @@ namespace Dados
             return false;
         }
 
+        /// <summary>
+        /// Adiciona à lista os ids dos alojamentos ocupados
+        /// </summary>
+        /// <param name="dataEntrada">data de entrada da estadia</param>
+        /// <param name="dataSaida">data de saida da estadia</param>
+        /// <returns></returns>
+        public List<int> ObterAlojamentosOcupados(DateTime dataEntrada, DateTime dataSaida)
+        {
+            List<int> alojamentosOcupados = new List<int>();
+
+            foreach (Reserva reserva in reservas)
+            {
+                if (reserva.DataEntrada <= dataSaida && reserva.DataSaida >= dataEntrada)
+                {
+                    alojamentosOcupados.Add(reserva.IdAlojamentoReserva);
+                }
+            }
+
+            return alojamentosOcupados;
+        }
 
         #endregion
     }

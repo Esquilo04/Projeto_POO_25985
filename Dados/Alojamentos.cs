@@ -363,6 +363,25 @@ namespace Dados
 
             return alojamentosDisponiveis;
         }
+
+
+        /// <summary>
+        /// Adiciona a uma lista todos os ids existentes
+        /// </summary>
+        /// <returns></returns>
+        public List<int> ObterTodosIdsAlojamentos()
+        {
+            List<int> idsAlojamentos = new List<int>();
+
+            foreach (Alojamento alojamento in alojamentos)
+            {
+                idsAlojamentos.Add(alojamento.IdAlojamento);
+            }
+
+            return idsAlojamentos;
+        }
+
+
         #endregion
     }
 }

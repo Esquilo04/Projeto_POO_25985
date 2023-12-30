@@ -379,7 +379,7 @@ namespace Regras_de_negocio
         /// <returns></returns>
         public bool AdicionarReserva()
         {
-            int idReserva, numeroHospedes, valor, idAlojamentoReserva, valorNoite;
+            int idReserva, numeroHospedes, valor, idAlojamentoReserva, valorNoite, idClienteReserva;
             DateTime dataEntrada, dataSaida;
             string regime;
             io.AdicionarReserva(out numeroHospedes, out dataEntrada, out dataSaida, out regime);
@@ -388,20 +388,29 @@ namespace Regras_de_negocio
                 return false;
             }
 
-            Console.WriteLine("Qual alojamento gostaria de reservar?");
+            Console.WriteLine("Qual o id do alojamento que gostaria de reservar?");
             idAlojamentoReserva = int.Parse(Console.ReadLine());
-            if(!alojamentos.VerificarIdAlojamentoExistente(idAlojamentoReserva))
+            if (!alojamentos.VerificarIdAlojamentoExistente(idAlojamentoReserva))
             {
                 Console.WriteLine("Alojamento não existente.");
                 return false;
             }
-            alojamentos.VerificarAlojamentoDisponivel(idAlojamentoReserva);
+
+            //alojamentos.VerificarAlojamentoDisponivel(idAlojamentoReserva);
+            MostrarClientes();
+            Console.WriteLine("Qual o id do cliente que deseja efetuar a reserva?");
+            idClienteReserva = int.Parse(Console.ReadLine());
+            if(!clientes.VerificarIdExistente(idClienteReserva))
+            {
+                Console.WriteLine("Cliente não existente.");
+                return false;
+            }
             valorNoite = alojamentos.ObterValorNoitePorId(idAlojamentoReserva);
             idReserva = reservas.ObterProximoIdReservaDisponivel();
             valor = reservas.CalcularValorDaReserva(numeroHospedes, dataEntrada, dataSaida, regime, valorNoite);
             
 
-            Reserva r = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva);
+            Reserva r = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva, idClienteReserva);
             if (idReserva > 0)
             {
                     reservas.AdicionarReserva(r);
@@ -550,15 +559,10 @@ namespace Regras_de_negocio
                 Console.WriteLine("Id da reserva nao existe.");
                 return false;
             }
-            MostrarClientes();
-            Console.WriteLine("Qual o id do Cliente que deseja efetuar Check_In?");
-            idCliente = int.Parse(Console.ReadLine());
-            if(!clientes.VerificarIdExistente(idCliente))
-            {
-                Console.WriteLine("Id do cliente nao existe.");
-                return false;
-            }
+           
             idAlojamento = reservas.ObterIdAlojamento(idReserva);
+            idCliente = reservas.ObterIdCliente(idReserva);
+
             ApagarReservaPorId2(idReserva);
             alojamentos.AlterarDisponibilidadeAlojamento(idAlojamento);
             dataCheck_In = DateTime.Now;
@@ -651,9 +655,11 @@ namespace Regras_de_negocio
         /// </summary>
         public void EfetuarCheck_Out()
         {
-            int id;
-            io.ObterIdCheck_In(out id);
-            check_Ins.EfetuarCheck_Out(id);
+            int idCheck_In, idAlojamento;
+            io.ObterIdCheck_In(out idCheck_In);
+            check_Ins.EfetuarCheck_Out(idCheck_In);
+            idAlojamento = check_Ins.ObterIdAlojamento(idCheck_In);
+            alojamentos.AlterarDisponibilidadeAlojamento(idAlojamento);
         }
 
         #endregion

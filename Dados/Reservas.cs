@@ -156,7 +156,7 @@ namespace Dados
                 {
                     foreach (var reservas in reservas)
                     {
-                        writer.WriteLine($"{reservas.IdReserva}#{reservas.NumeroHospedes}#{reservas.DataEntrada}#{reservas.DataSaida}#{reservas.Regime}#{reservas.Valor}#{reservas.IdAlojamentoReserva}");
+                        writer.WriteLine($"{reservas.IdReserva}#{reservas.NumeroHospedes}#{reservas.DataEntrada}#{reservas.DataSaida}#{reservas.Regime}#{reservas.Valor}#{reservas.IdAlojamentoReserva}#{reservas.IdClienteReserva}");
                     }
                 }
                 return true;
@@ -190,9 +190,10 @@ namespace Dados
                         string regime = dados[4];
                         int valor = int.Parse(dados[5]);
                         int idAlojamentoReserva = int.Parse(dados[6]);
+                        int idClienteReserva = int.Parse(dados[7]);
 
 
-                        Reserva reserva = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva);
+                        Reserva reserva = new Reserva(idReserva, numeroHospedes, dataEntrada, dataSaida, regime, valor, idAlojamentoReserva, idClienteReserva);
 
                         reservas.Add(reserva);
 
@@ -277,6 +278,23 @@ namespace Dados
                 if (reserva.IdReserva == id)
                 {
                     return reserva.IdAlojamentoReserva;
+                }
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// Obtem o id de determinado cliente
+        /// </summary>
+        /// <param name="id">id do cliente</param>
+        /// <returns></returns>
+        public int ObterIdCliente(int id)
+        {
+            foreach (Reserva reserva in reservas)
+            {
+                if (reserva.IdReserva == id)
+                {
+                    return reserva.IdClienteReserva;
                 }
             }
             return 0;

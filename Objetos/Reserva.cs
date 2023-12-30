@@ -29,6 +29,7 @@ namespace Objetos
         private string regime;           // Regime da reserva (ex: meia-pensão, pensão completa, etc.)
         private int valor;               // Valor da estadia
         private int idAlojamentoReserva; // id do alojamento associado à reserva
+        private int idClienteReserva;    // id do cliente associado à reserva
         #endregion
 
         #region Comportamentos
@@ -47,6 +48,7 @@ namespace Objetos
             regime = "";
             valor = 0;
             idAlojamentoReserva = 0;
+            idClienteReserva = 0;
         }
 
         /// <summary>
@@ -58,8 +60,10 @@ namespace Objetos
         /// <param name="dataSaida">Data de saída</param>
         /// <param name="regime">Regime da estadia</param>
         /// <param name="valor">Valor da estadia</param>
+        /// <param name="idAlojamentoReserva">Id do alojamento associado à reserva</param>
+        /// <param name="idClienteReserva">Id do cliente associado à reserva</param>
         /// 
-        public Reserva(int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valor, int idAlojamentoReserva)
+        public Reserva(int idReserva, int numeroHospedes, DateTime dataEntrada, DateTime dataSaida, string regime, int valor, int idAlojamentoReserva, int idClienteReserva)
         {
             this.idReserva = idReserva;
             this.numeroHospedes = numeroHospedes;
@@ -68,6 +72,7 @@ namespace Objetos
             this.regime = regime;
             this.valor = valor;
             this.idAlojamentoReserva = idAlojamentoReserva;
+            this.idClienteReserva= idClienteReserva;
         }
 
         #endregion
@@ -179,6 +184,21 @@ namespace Objetos
                 idAlojamentoReserva = value;
             }
         }
+
+        /// <summary>
+        /// Propriedade para acessar e modificar o ID do cliente asociado à reserva.
+        /// </summary>
+        public int IdClienteReserva
+        {
+            get
+            {
+                return idClienteReserva;
+            }
+            set
+            {
+                idClienteReserva = value;
+            }
+        }
         #endregion
 
         #region Operadores
@@ -204,7 +224,8 @@ namespace Objetos
                    p1.dataSaida == p2.dataSaida &&
                    p1.regime == p2.regime &&
                    p1.valor == p2.valor &&
-                   p1.idAlojamentoReserva == p2.idAlojamentoReserva;
+                   p1.idAlojamentoReserva == p2.idAlojamentoReserva &&
+                   p1.idClienteReserva == p2.idClienteReserva;
         }
 
         /// <summary>
@@ -224,7 +245,7 @@ namespace Objetos
         /// </summary>
         public override string ToString()
         {
-            return String.Format("Id Reserva: {0} - Número Hospedes: {1} - Data Entrada: {2} - Data Saída: {3} - Regime: {4} - Valor: {5} - Id do alojamento: {6}", idReserva.ToString(), numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString(), idAlojamentoReserva.ToString());
+            return String.Format("Id Reserva: {0} - Número Hospedes: {1} - Data Entrada: {2} - Data Saída: {3} - Regime: {4} - Valor: {5} - Id do alojamento: {6} - Id do Cliente: {7}", idReserva.ToString(), numeroHospedes.ToString(), dataEntrada.ToString(), dataSaida.ToString(), regime, valor.ToString(), idAlojamentoReserva.ToString(), idClienteReserva.ToString());
         }
 
         /// <summary>

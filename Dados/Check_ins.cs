@@ -237,6 +237,22 @@ namespace Dados
             return false;
         }
 
+        /// <summary>
+        /// Obtem o id de determinado alojamento
+        /// </summary>
+        /// <param name="id">id do alojamento</param>
+        /// <returns></returns>
+        public int ObterIdAlojamento(int id)
+        {
+            foreach (Check_In check_In in check_Ins)
+            {
+                if (check_In.IdCheck_In == id)
+                {
+                    return check_In.IdAlojamento;
+                }
+            }
+            return 0;
+        }
 
         #endregion
     }

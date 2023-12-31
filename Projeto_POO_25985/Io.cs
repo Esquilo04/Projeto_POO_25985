@@ -105,10 +105,6 @@ namespace Projeto_POO_25985
             return aux; // Se necessário, você pode retornar o valor escolhido
         }
 
-        /// <summary>
-        /// Menu dos clientes
-        /// </summary>
-        /// <param name="opcao">opcao escolhida</param>
         public void MenuClientes(out int opcao)
         {
             Console.WriteLine("\nO que deseja fazer?");
@@ -131,7 +127,7 @@ namespace Projeto_POO_25985
         /// </summary>
 
 
-        
+
         public void AdicionarAlojamento(out string morada, out int numeroQuartos, out int classificacao, out int disponibilidade, out int valorNoite)
         {
             Console.WriteLine("Qual a morada do alojamento?");

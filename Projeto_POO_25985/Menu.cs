@@ -245,7 +245,10 @@ namespace Projeto_POO_25985
                         regras.MostrarCheck_InsPendentes();
                         break;
                     case 5:
-                        regras.MostrarCheck_InsPendentes();
+                        if(!regras.MostrarCheck_InsPendentes())
+                        {
+                            break;
+                        }
                         regras.EfetuarCheck_Out();
                         break;
 

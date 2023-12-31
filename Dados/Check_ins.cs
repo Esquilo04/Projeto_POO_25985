@@ -197,9 +197,9 @@ namespace Dados
         /// <summary>
         /// Mostra os check ins que ainda estão pendentes (que não fizeram check out)
         /// </summary>
-        public void MostrarCheck_InsPendentes()
+        public bool MostrarCheck_InsPendentes()
         {
-            int aux=0;
+            int aux = 0;
             foreach (Check_In check_In in check_Ins)
             {
                 if (check_In.Estadia == 0)
@@ -209,13 +209,15 @@ namespace Dados
                 }
             }
 
-            if(aux==0)
-            { 
-                Console.WriteLine("Não existe nenhum Check_In pendente."); 
-
+            if (aux == 0)
+            {
+                Console.WriteLine("Não existe nenhum Check_In pendente.");
+                return false; // Retorna false se não houver check-ins pendentes
             }
-            
+
+            return true; // Retorna true se houver check-ins pendentes
         }
+
 
         /// <summary>
         /// Efetua check out

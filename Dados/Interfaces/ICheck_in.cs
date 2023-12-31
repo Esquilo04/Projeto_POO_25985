@@ -54,7 +54,7 @@ namespace Dados
         /// <summary>
         /// Exibe os Check_Ins pendentes.
         /// </summary>
-        void MostrarCheck_InsPendentes();
+        bool MostrarCheck_InsPendentes();
 
         /// <summary>
         /// Efetua um Check_Out com base no ID do Check_In fornecido.

@@ -593,9 +593,13 @@ namespace Regras_de_negocio
         /// <summary>
         /// Mostra todos os check ins na consola pendentes
         /// </summary>
-        public void MostrarCheck_InsPendentes()
+        public bool MostrarCheck_InsPendentes()
         {
-            check_Ins.MostrarCheck_InsPendentes();
+            if(!check_Ins.MostrarCheck_InsPendentes())
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
@@ -653,13 +657,17 @@ namespace Regras_de_negocio
         /// <summary>
         /// Efetua o check out
         /// </summary>
-        public void EfetuarCheck_Out()
+        public bool EfetuarCheck_Out()
         {
             int idCheck_In, idAlojamento;
             io.ObterIdCheck_In(out idCheck_In);
-            check_Ins.EfetuarCheck_Out(idCheck_In);
+            if(!check_Ins.EfetuarCheck_Out(idCheck_In))
+            {
+                return false;
+            }
             idAlojamento = check_Ins.ObterIdAlojamento(idCheck_In);
             alojamentos.AlterarDisponibilidadeAlojamento(idAlojamento);
+            return true;
         }
 
         #endregion
